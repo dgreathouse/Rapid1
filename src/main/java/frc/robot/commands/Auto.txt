@@ -1,0 +1,13 @@
+Red and Blue area moves are assumed to be the same for distances and angles
+
+Play 1:  Shoot, Get Ball 1 Shoot
+Play 2:  Shoot, Get Ball 2 Shoot
+Play 3:  Shoot, Get Ball 1 and 2, Shoot
+Play 4:  Shoot, Get Ball 1 and 2, Shoot, Get Ball 3, Shoot
+Play 5:  Shoot, Leave Tarmac
+Play 6:  Do Nothing (Default)
+
+Commands:
+ Driveline - Drive distance, Rotate angles
+ Intake - On, Off
+ Shooter - Shoot 1, Shoot 2

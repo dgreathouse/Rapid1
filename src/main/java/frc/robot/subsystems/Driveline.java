@@ -182,4 +182,7 @@ public class Driveline extends SubsystemBase {
     double vel = (m_leftFront.getDriveVelocityInNativeUnits() + m_leftBack.getDriveVelocityInNativeUnits() + m_rightBack.getDriveVelocityInNativeUnits() + m_rightFront.getDriveVelocityInNativeUnits()) / 4.0;
     return vel;
   }
+  public double getRobotAngle(){
+    return -m_gyro.getAngle();
+  }
 }

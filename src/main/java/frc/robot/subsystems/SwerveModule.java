@@ -53,7 +53,7 @@ public class SwerveModule {
         m_driveMotor.setInverted(_drvInvert);
         m_driveMotor.setNeutralMode(NeutralMode.Brake);
         m_driveMotor.configOpenloopRamp(0.1);
-        m_driveMotor.configClosedloopRamp(0.1);
+       // m_driveMotor.configClosedloopRamp(0.1);
 
         // Initialize slot 1 for MotionMagic Autonomous drive
         m_driveMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 10);
@@ -65,9 +65,9 @@ public class SwerveModule {
         m_driveMotor.configPeakOutputReverse(-1, COMM.kTimeoutMs);
         m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, 0);
         m_driveMotor.config_kP(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
-        m_driveMotor.config_kI(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
-        m_driveMotor.config_kD(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
-        m_driveMotor.config_kF(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
+        m_driveMotor.config_kI(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kI, COMM.kTimeoutMs);
+        m_driveMotor.config_kD(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kD, COMM.kTimeoutMs);
+        m_driveMotor.config_kF(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kF, COMM.kTimeoutMs);
         m_driveMotor.configMotionCruiseVelocity(SWERVE.kDriveMotionMagic_CruiseVel, COMM.kTimeoutMs);
         m_driveMotor.configMotionAcceleration(SWERVE.kDriveMotionMagic_Accel, COMM.kTimeoutMs);
 
@@ -177,7 +177,7 @@ public class SwerveModule {
         m_steerMotor.set(ControlMode.Position, steerCnts);
 
         
-        m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, COMM.kTimeoutMs);  // MotionMagic PID in slot 1.
+        m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, COMM.kTimeoutMs);  // MotionMagic PID in slot 0.
         m_driveMotor.set(TalonFXControlMode.MotionMagic, _distanceInches * SWERVE.kDriveCntsPerInch);
     }
     private void calcNewAngle(SwerveModuleState _state) {

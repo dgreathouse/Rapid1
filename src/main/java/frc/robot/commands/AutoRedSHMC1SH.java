@@ -17,7 +17,7 @@ public class AutoRedSHMC1SH extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoDriveCommand(0.2, 0.2, 48)
+      new AutoDriveCommand(0.4, 0.4, 48)
       
     );
   }

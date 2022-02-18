@@ -56,11 +56,19 @@ public final class Constants {
         public static final double kWheelDiameter = 4.0;
         public static final double kDriveCntsPerInch = kDriveMotEncoderCountsPerRev * kDriveRatio / (Math.PI * kWheelDiameter);
         public static final int kDriveAutoMotionMagicSlotIdx = 0;
-        public static final double kDriveMotionMagic_kP = 0;
-        public static final double kDriveMotionMagic_kI = 0;
-        public static final double kDriveMotionMagic_kD = 0;
-        public static final double kDriveMotionMagic_kF = 0;
-
+        //https://docs.ctre-phoenix.com/en/stable/ch16_ClosedLoop.html#calculating-velocity-feed-forward-gain-kf
+        // Starting kP of 0.01. Adjust higher to get closer to 10888 or lower to stop oscilations.
+        public static final double kDriveMotionMagic_kP = 0.01;
+        // Start with small value
+        public static final double kDriveMotionMagic_kI = 0.0005;
+        // Starting kD is typically 10 x kP
+        public static final double kDriveMotionMagic_kD = 0.10;
+        // kF 50% speed. (0.50*1023) / (kMaxDriveVelUnitsPer100ms * 0.5) = 0.047
+        public static final double kDriveMotionMagic_kF = 0.047; 
+        // Set Cruise Velocit to 1/2 of max like kF. 
+        public static final double kDriveMotionMagic_CruiseVel = 10888;
+        // Set Accel to 1/2 of Max for 1 second ramp up.
+        public static final double kDriveMotionMagic_Accel = 10888;
 
 
         public static final double kSteerMotEncoderCountsPerRev = 2048.0;

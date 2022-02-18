@@ -12,6 +12,7 @@ import frc.robot.RobotContainer;
 public class AutoDriveCommand extends CommandBase {
   double m_xSpeed, m_ySpeed, m_distanceIn;
   Timer timer;
+  boolean isFinished = false;
   /** Creates a new AutoDriveCommand. */
   public AutoDriveCommand(double _xSpeed, double _ySpeed, double _distanceIn) {
 
@@ -25,9 +26,11 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void initialize() {
     timer = new Timer();
+    timer.start();
 
   }
 
+  
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
@@ -35,7 +38,14 @@ public class AutoDriveCommand extends CommandBase {
       RobotContainer.driveline.autoRotateWheels(m_xSpeed, m_ySpeed);
       RobotContainer.driveline.resetSwerveDriveEncoders();
     }else {
+      // This will maintain the wheels at angle and drive to distance using Motion Magic
       RobotContainer.driveline.autoDrive(m_xSpeed, m_ySpeed, m_distanceIn);
+      double err = Math.abs(RobotContainer.driveline.getAverageDistanceInInches() - m_distanceIn);
+      if(err < 1.0){
+        isFinished = true;
+        // Do this once so the Drive wheels are set to percent output and set off while wheels maintain angle.
+        RobotContainer.driveline.autoRotateWheels(m_xSpeed, m_ySpeed);
+      }
     }
   }
 
@@ -46,6 +56,6 @@ public class AutoDriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isFinished;
   }
 }

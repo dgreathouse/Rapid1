@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
@@ -20,6 +21,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.COMM;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.SWERVE;
@@ -43,17 +45,16 @@ public class SwerveModule {
             { -1, 1, 2, 3, -2, -3, -4, -1 }, { -2, -1, 1, 2, 2, 1, -1, -2 } };
     private int m_virtualQuad = 1;
     private int m_previousDesiredQuad = 1;
-
-    public SwerveModule(int _steerCANID, int _driveCANID, int _steerCANCoderCANID, InvertType _drvInvert, InvertType _strInvert, double _angOffsetDeg) {
-        
+    private String name = "";
+    public SwerveModule(String _name, int _steerCANID, int _driveCANID, int _steerCANCoderCANID, InvertType _drvInvert, InvertType _strInvert, double _angOffsetDeg) {
+        name = _name;
         m_driveMotor = new WPI_TalonFX(_driveCANID);
         m_driveMotor.configFactoryDefault();
         m_driveMotor.setInverted(_drvInvert);
-        m_driveMotor.setNeutralMode(NeutralMode.Coast);
+        m_driveMotor.setNeutralMode(NeutralMode.Brake);
         m_driveMotor.configOpenloopRamp(0.1);
         m_driveMotor.configClosedloopRamp(0.1);
-        m_driveMotor.config_kP(0, 0.1);
-        m_driveMotor.config_kF(0, 0.1);
+
         // Initialize slot 1 for MotionMagic Autonomous drive
         m_driveMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 10);
         m_driveMotor.configNeutralDeadband(0.001, 30);
@@ -62,20 +63,19 @@ public class SwerveModule {
         m_driveMotor.configNominalOutputReverse(0, COMM.kTimeoutMs);
         m_driveMotor.configPeakOutputForward(1, COMM.kTimeoutMs);
         m_driveMotor.configPeakOutputReverse(-1, COMM.kTimeoutMs);
-        m_driveMotor.selectProfileSlot(0, 0);
-        m_driveMotor.config_kP(SWERVE.kDriveAutoMotionMagicSlotIdx, 0, COMM.kTimeoutMs);
-        m_driveMotor.config_kI(SWERVE.kDriveAutoMotionMagicSlotIdx, 0, COMM.kTimeoutMs);
-        m_driveMotor.config_kD(SWERVE.kDriveAutoMotionMagicSlotIdx, 0, COMM.kTimeoutMs);
-        m_driveMotor.config_kF(SWERVE.kDriveAutoMotionMagicSlotIdx, 0, COMM.kTimeoutMs);
-        m_driveMotor.configMotionCruiseVelocity(0, COMM.kTimeoutMs);
-        m_driveMotor.configMotionAcceleration(0, COMM.kTimeoutMs);
-
+        m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, 0);
+        m_driveMotor.config_kP(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
+        m_driveMotor.config_kI(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
+        m_driveMotor.config_kD(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
+        m_driveMotor.config_kF(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kP, COMM.kTimeoutMs);
+        m_driveMotor.configMotionCruiseVelocity(SWERVE.kDriveMotionMagic_CruiseVel, COMM.kTimeoutMs);
+        m_driveMotor.configMotionAcceleration(SWERVE.kDriveMotionMagic_Accel, COMM.kTimeoutMs);
 
 
 
         m_steerMotor = new WPI_TalonFX(_steerCANID);
         m_steerMotor.setInverted(_strInvert);
-        m_steerMotor.setNeutralMode(NeutralMode.Coast);
+        m_steerMotor.setNeutralMode(NeutralMode.Brake);
         m_steerMotor.config_kP(0, .105);
       //  m_steerMotor.closedLoop(0, 1);
         m_steerMotor.configClosedloopRamp(0.1);
@@ -86,8 +86,8 @@ public class SwerveModule {
 
         m_steerEncoder = new CANCoder(_steerCANCoderCANID);
         double steerAng = m_steerEncoder.getAbsolutePosition();
-        double steerDiff = Math.abs(steerAng - _angOffsetDeg);
-        
+        double steerDiff =  (steerAng - _angOffsetDeg) * SWERVE.kSteerMotCntsPerWheelDeg;
+       //SmartDashboard.putNumber(Double.toString(_angOffsetDeg), steerDiff);
         m_steerMotor.setSelectedSensorPosition(steerDiff);
 
 
@@ -144,6 +144,7 @@ public class SwerveModule {
       driveSpeed = driveSpeed / DRIVE.kMaxSpeedMetersPerSecond;
       m_driveMotor.set(ControlMode.PercentOutput, driveSpeed);
       m_driveSpeed = driveSpeed;
+     // SmartDashboard.putNumber(name + "_Vel", m_driveMotor.getSelectedSensorVelocity());
     }
 
     public void setDesiredState(SwerveModuleState _desiredState, boolean disableDrive){
@@ -174,7 +175,7 @@ public class SwerveModule {
 
         
         m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, COMM.kTimeoutMs);  // MotionMagic PID in slot 1.
-        m_driveMotor.set(ControlMode.MotionMagic, _distanceInches * SWERVE.kDriveCntsPerInch);
+        m_driveMotor.set(TalonFXControlMode.MotionMagic, _distanceInches * SWERVE.kDriveCntsPerInch);
     }
     private void calcNewAngle(SwerveModuleState _state) {
         double newAng;

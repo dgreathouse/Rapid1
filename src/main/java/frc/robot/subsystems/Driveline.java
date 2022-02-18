@@ -21,14 +21,14 @@ import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.SWERVE;
 
 public class Driveline extends SubsystemBase {
-  private final SwerveModule m_leftFront = new SwerveModule(CANIDS.kDriveline_LFSteer, CANIDS.kDriveline_LFDrive,
+  private final SwerveModule m_leftFront = new SwerveModule("LF", CANIDS.kDriveline_LFSteer, CANIDS.kDriveline_LFDrive,
       CANIDS.kDriveline_LFSteerEnc, InvertType.None, InvertType.InvertMotorOutput, SWERVE.kLFAbsoluteOffsetInDegrees);
-  private final SwerveModule m_rightFront = new SwerveModule(CANIDS.kDriveline_RFSteer, CANIDS.kDriveline_RFDrive,
+  private final SwerveModule m_rightFront = new SwerveModule("RF", CANIDS.kDriveline_RFSteer, CANIDS.kDriveline_RFDrive,
       CANIDS.kDriveline_RFSteerEnc, InvertType.InvertMotorOutput, InvertType.InvertMotorOutput,
       SWERVE.kRFAbsoluteOffsetInDegrees);
-  private final SwerveModule m_leftBack = new SwerveModule(CANIDS.kDriveline_LBSteer, CANIDS.kDriveline_LBDrive,
+  private final SwerveModule m_leftBack = new SwerveModule("LB", CANIDS.kDriveline_LBSteer, CANIDS.kDriveline_LBDrive,
       CANIDS.kDriveline_LBSteerEnc, InvertType.None, InvertType.InvertMotorOutput, SWERVE.kLBAbsoluteOffsetInDegrees);
-  private final SwerveModule m_rightBack = new SwerveModule(CANIDS.kDriveline_RBSteer, CANIDS.kDriveline_RBDrive,
+  private final SwerveModule m_rightBack = new SwerveModule("RB", CANIDS.kDriveline_RBSteer, CANIDS.kDriveline_RBDrive,
       CANIDS.kDriveline_RBSteerEnc, InvertType.InvertMotorOutput, InvertType.InvertMotorOutput,
       SWERVE.kRBAbsoluteOffsetInDegrees);
 
@@ -171,5 +171,9 @@ public class Driveline extends SubsystemBase {
     m_rightFront.resetDriveMotorCnts();
     m_leftBack.resetDriveMotorCnts();
     m_rightBack.resetDriveMotorCnts();
+  }
+  public double getAverageDistanceInInches(){
+    double dis = (m_leftFront.getDriveMotorCnts() + m_leftBack.getDriveMotorCnts() + m_rightBack.getDriveMotorCnts() + m_rightFront.getDriveMotorCnts()) / 4.0;
+    return dis / SWERVE.kDriveAutoMotionMagicSlotIdx;
   }
 }

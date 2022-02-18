@@ -129,6 +129,8 @@ public class Driveline extends SubsystemBase {
     m_rightFront.setDesiredStateAutoMotionMagic(swerveModuleStates[1], _distanceIn);
     m_leftBack.setDesiredStateAutoMotionMagic(swerveModuleStates[2], _distanceIn);
     m_rightBack.setDesiredStateAutoMotionMagic(swerveModuleStates[3], _distanceIn);
+    SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
+    SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
 
   }
 
@@ -174,6 +176,10 @@ public class Driveline extends SubsystemBase {
   }
   public double getAverageDistanceInInches(){
     double dis = (m_leftFront.getDriveMotorCnts() + m_leftBack.getDriveMotorCnts() + m_rightBack.getDriveMotorCnts() + m_rightFront.getDriveMotorCnts()) / 4.0;
-    return dis / SWERVE.kDriveAutoMotionMagicSlotIdx;
+    return dis / SWERVE.kDriveCntsPerInch;
+  }
+  public double getAverageVelocity(){
+    double vel = (m_leftFront.getDriveVelocityInNativeUnits() + m_leftBack.getDriveVelocityInNativeUnits() + m_rightBack.getDriveVelocityInNativeUnits() + m_rightFront.getDriveVelocityInNativeUnits()) / 4.0;
+    return vel;
   }
 }

@@ -127,6 +127,9 @@ public class SwerveModule {
     public double getDriveVelocityInMPS() {
         return m_driveMotor.getSelectedSensorVelocity(0) * DRIVE.kDriveVelRatio;
     }
+    public double getDriveVelocityInNativeUnits(){
+        return m_driveMotor.getSelectedSensorVelocity(0);
+    }
 
     public double getDriveSpeed(){
         return m_driveSpeed;

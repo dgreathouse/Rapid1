@@ -13,7 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.AutoLeaveTarmac;
 import frc.robot.commands.AutoRedSHMC1SH;
+import frc.robot.commands.AutoT1C1S2;
+import frc.robot.commands.AutoT2C3S2;
+import frc.robot.commands.AutoT2C3S2C24;
+import frc.robot.commands.AutoT2S1C24;
 import frc.robot.commands.DrivelineDefaultCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeSpinCommand;
@@ -61,8 +66,15 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    autoChooser.setDefaultOption("Red ShootHi Cargo 1 SH", new AutoRedSHMC1SH());
-    autoChooser.addOption("Do Nothing", new AutoDoNothing());
+    autoChooser.addOption("Test", new AutoRedSHMC1SH());
+    autoChooser.addOption(AutoLeaveTarmac.name, new AutoLeaveTarmac());
+
+    autoChooser.addOption(AutoT1C1S2.name, new AutoT1C1S2());
+    autoChooser.addOption(AutoT2C3S2.name, new AutoT2C3S2());
+    autoChooser.addOption(AutoT2C3S2C24.name, new AutoT2C3S2C24());
+    autoChooser.addOption(AutoT2S1C24.name, new AutoT2S1C24());
+
+    autoChooser.setDefaultOption(AutoDoNothing.name, new AutoDoNothing());
 
     SmartDashboard.putData(autoChooser);
     //CameraServer.startAutomaticCapture();

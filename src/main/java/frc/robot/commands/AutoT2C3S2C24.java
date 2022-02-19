@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoDoNothing extends SequentialCommandGroup {
-  public static String name = "Do Nothing";
-  /** Creates a new AutoDoNothing. */
-  public AutoDoNothing() {
+public class AutoT2C3S2C24 extends SequentialCommandGroup {
+  public static String name = "T2 C3 S2 C24";
+  /** Creates a new AutoT2C3S2C24. */
+  public AutoT2C3S2C24() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands();

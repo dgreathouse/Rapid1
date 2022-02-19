@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -34,6 +34,7 @@ public class Shooter extends SubsystemBase {
 
   }
   public void setAngle(int _angle){
+    //200 is Max
     angleMotor.set(ControlMode.Position, _angle);
   }
 
@@ -48,9 +49,5 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putString("Shot Enum", ShotData.shot.toString());
     SmartDashboard.putNumber("Shot Speed", ShotData.getSpeed());
     SmartDashboard.putNumber("Shot Angle", ShotData.getAngle());
-    SmartDashboard.putNumber("Shot Current Angle", angleMotor.getSelectedSensorPosition());
-SmartDashboard.putNumber("LCurrent", leftMotor.getSupplyCurrent());
-SmartDashboard.putNumber("RCurrent", rightMotor.getSupplyCurrent());
-
   }
 }

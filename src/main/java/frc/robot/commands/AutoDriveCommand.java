@@ -27,7 +27,7 @@ public class AutoDriveCommand extends CommandBase {
   public void initialize() {
     timer = new Timer();
     timer.start();
-
+    RobotContainer.driveline.resetGyro();
   }
 
   

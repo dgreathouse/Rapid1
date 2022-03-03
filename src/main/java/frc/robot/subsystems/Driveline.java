@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -16,6 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.CANIDS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.SWERVE;
@@ -120,9 +120,12 @@ public class Driveline extends SubsystemBase {
    * @param _distanceIn Distances to travel in inches
    */
   public void autoDrive(double _xSpeed, double _ySpeed, double _distanceIn) {
+    double xSpeed = _xSpeed * DRIVE.kMaxSpeedMetersPerSecond;
+    double ySpeed = -_ySpeed * DRIVE.kMaxSpeedMetersPerSecond;
 
+    double rot = RobotContainer.driveline.getRobotAngle() * 0.001;
     SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics
-        .toSwerveModuleStates(new ChassisSpeeds(_xSpeed, _ySpeed, 0));
+        .toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, rot));
     // Normalize the wheel speeds
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DRIVE.kMaxSpeedMetersPerSecond);
     m_leftFront.setDesiredStateAutoMotionMagic(swerveModuleStates[0], _distanceIn);
@@ -151,7 +154,7 @@ public class Driveline extends SubsystemBase {
     m_rightBack.setDesiredState(swerveModuleStates[3], true);
   }
 
-  public void autoRotateRobot(double _rot, double angle) {
+  public void autoRotateRobot(double _rot) {
     SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, 0, _rot));
     // Normalize the wheel speeds
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DRIVE.kMaxAngularRateRadPerSecond);
@@ -184,5 +187,8 @@ public class Driveline extends SubsystemBase {
   }
   public double getRobotAngle(){
     return -m_gyro.getAngle();
+  }
+  public void resetGyro(){
+    m_gyro.reset();
   }
 }

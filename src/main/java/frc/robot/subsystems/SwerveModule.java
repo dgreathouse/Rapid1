@@ -70,6 +70,7 @@ public class SwerveModule {
         m_driveMotor.config_kF(SWERVE.kDriveAutoMotionMagicSlotIdx, SWERVE.kDriveMotionMagic_kF, COMM.kTimeoutMs);
         m_driveMotor.configMotionCruiseVelocity(SWERVE.kDriveMotionMagic_CruiseVel, COMM.kTimeoutMs);
         m_driveMotor.configMotionAcceleration(SWERVE.kDriveMotionMagic_Accel, COMM.kTimeoutMs);
+        m_driveMotor.configMotionSCurveStrength(SWERVE.kDriveMotionMagic_Smoothing);
 
 
 
@@ -137,7 +138,7 @@ public class SwerveModule {
     // Calculate the states and command the motors.
     public void setDesiredState(SwerveModuleState _desiredState) {
         //calcNewAngle(_desiredState);
-    //  SwerveModuleState swerveModuleState = _desiredState;
+      //SwerveModuleState swerveModuleState = _desiredState;
       SwerveModuleState swerveModuleState = SwerveModuleState.optimize(_desiredState, getRotation2d());
       double steerAng = swerveModuleState.angle.getRadians();
       double steerCnts = steerAng * SWERVE.kSteerMotCountsPerWheelRadian;
@@ -151,7 +152,8 @@ public class SwerveModule {
     }
 
     public void setDesiredState(SwerveModuleState _desiredState, boolean disableDrive){
-        SwerveModuleState swerveModuleState = _desiredState;
+        //SwerveModuleState swerveModuleState = _desiredState;
+        SwerveModuleState swerveModuleState = SwerveModuleState.optimize(_desiredState, getRotation2d());
         double steerAng = swerveModuleState.angle.getRadians();
         double steerCnts = steerAng * SWERVE.kSteerMotCountsPerWheelRadian;
         m_steerMotor.set(ControlMode.Position, steerCnts);
@@ -172,12 +174,13 @@ public class SwerveModule {
      */
     public void setDesiredStateAutoMotionMagic(SwerveModuleState _desiredState, double _distanceInches){
         SwerveModuleState swerveModuleState = _desiredState;
+       // SwerveModuleState swerveModuleState = SwerveModuleState.optimize(_desiredState, getRotation2d());
         double steerAng = swerveModuleState.angle.getRadians();
         double steerCnts = steerAng * SWERVE.kSteerMotCountsPerWheelRadian;
         m_steerMotor.set(ControlMode.Position, steerCnts);
 
         
-        m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, COMM.kTimeoutMs);  // MotionMagic PID in slot 0.
+        m_driveMotor.selectProfileSlot(SWERVE.kDriveAutoMotionMagicSlotIdx, 0);  // MotionMagic PID in slot 0.
         m_driveMotor.set(TalonFXControlMode.MotionMagic, _distanceInches * SWERVE.kDriveCntsPerInch);
     }
     private void calcNewAngle(SwerveModuleState _state) {

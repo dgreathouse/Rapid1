@@ -58,17 +58,18 @@ public final class Constants {
         public static final int kDriveAutoMotionMagicSlotIdx = 0;
         //https://docs.ctre-phoenix.com/en/stable/ch16_ClosedLoop.html#calculating-velocity-feed-forward-gain-kf
         // Starting kP of 0.01. Adjust higher to get closer to 10888 or lower to stop oscilations.
-        public static final double kDriveMotionMagic_kP = 0.01;
+        public static final double kDriveMotionMagic_kP = 0.0;
         // Start with small value
-        public static final double kDriveMotionMagic_kI = 0.0005;
+        public static final double kDriveMotionMagic_kI = 0.0;
         // Starting kD is typically 10 x kP
-        public static final double kDriveMotionMagic_kD = 0.10;
+        public static final double kDriveMotionMagic_kD = 0.0;
         // kF 50% speed. (0.50*1023) / (kMaxDriveVelUnitsPer100ms * 0.5) = 0.047
-        public static final double kDriveMotionMagic_kF = 0.047; 
+        public static final double kDriveMotionMagic_kF = 0.2; 
         // Set Cruise Velocit to 1/2 of max like kF. 
         public static final double kDriveMotionMagic_CruiseVel = 10888;
         // Set Accel to 1/2 of Max for 1 second ramp up.
-        public static final double kDriveMotionMagic_Accel = 10888;
+        public static final double kDriveMotionMagic_Accel = 500;
+        public static final int kDriveMotionMagic_Smoothing = 1;
 
 
         public static final double kSteerMotEncoderCountsPerRev = 2048.0;
@@ -85,7 +86,7 @@ public final class Constants {
     }
 
     public static final class OI {
-        public static final double kDeadband = 0.1;
+        public static final double kDeadband = 0.2;
     }
 
     public static final class CANIDS {
@@ -107,6 +108,7 @@ public final class Constants {
         public static final int kShooterAngle = 23;
 
         public static final int kIntake = 30;
+        public static final int kIntakeExtMotor = 40;
     }
 
     public static final class INTAKE {
@@ -114,23 +116,23 @@ public final class Constants {
     }
 
     public static final class SHOOTER {
-        public static final double kBackHiSpeed = 1;
+        public static final double kBackHiSpeed = 0.7;
         public static final int kBackHiAngle = 0;
 
-        public static final double kBackLowSpeed = 0.9;
-        public static final int kBackLowAngle = -40;
+        public static final double kBackLowSpeed = 0.5;
+        public static final int kBackLowAngle = 0;
 
-        public static final double kFrontHiCloseSpeed = 0.9;
-        public static final int kFrontHiCloseAngle = -60;
+        public static final double kFrontHiCloseSpeed = 0.60;
+        public static final int kFrontHiCloseAngle = -100;
 
-        public static final double kFrontLowCloseSpeed = 0.9;
-        public static final int kFrontLowCloseAngle = -80;
+        public static final double kFrontLowCloseSpeed = 0.45;
+        public static final int kFrontLowCloseAngle = -140;
 
-        public static final double FRONT_HI_36IN_SPEED = 0.9;
-        public static final int FRONT_HI_36IN_ANGLE = -100;
+        public static final double FRONT_HI_36IN_SPEED = 0.7;
+        public static final int FRONT_HI_36IN_ANGLE = -140;
 
-        public static final double FRONT_HI_LAUNCH_SPEED = 0.9;
-        public static final int FRONT_HI_LAUNCH_ANGLE = -150;
+        public static final double FRONT_HI_LAUNCH_SPEED = 1;
+        public static final int FRONT_HI_LAUNCH_ANGLE = -200;
 
     }
 }

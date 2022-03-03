@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,12 +22,15 @@ import frc.robot.commands.AutoT2C3S2C24;
 import frc.robot.commands.AutoT2S1C24;
 import frc.robot.commands.DrivelineDefaultCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.IntakeExtDefaultCommand;
+import frc.robot.commands.IntakeExtDownCommand;
 import frc.robot.commands.IntakeSpinCommand;
 import frc.robot.commands.LiftDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterShootCommand;
 import frc.robot.subsystems.Driveline;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeExt;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 
@@ -45,6 +49,9 @@ public class RobotContainer {
   public static final Intake intake = new Intake();
   private IntakeDefaultCommand  intakeDefaultCommand = new IntakeDefaultCommand(intake);
 
+  public static final IntakeExt intakeExt = new IntakeExt();
+  private IntakeExtDefaultCommand intakeExtDefaultCommand = new IntakeExtDefaultCommand(intakeExt);
+
   public static final Shooter shooter = new Shooter();
   private ShooterDefaultCommand shooterDefaultCommand = new ShooterDefaultCommand(shooter);
 
@@ -55,7 +62,7 @@ public class RobotContainer {
   public static Joystick stickOperator = new Joystick(1);
 
   SendableChooser<Command> autoChooser = new SendableChooser<>();
-
+  public static final PneumaticsControlModule PCM = new PneumaticsControlModule();
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -63,6 +70,7 @@ public class RobotContainer {
     intake.setDefaultCommand(intakeDefaultCommand);
     shooter.setDefaultCommand(shooterDefaultCommand);
     lift.setDefaultCommand(liftDefaultCommand);
+    intakeExt.setDefaultCommand(intakeExtDefaultCommand);
     // Configure the button bindings
     configureButtonBindings();
 
@@ -95,6 +103,10 @@ public class RobotContainer {
 
     JoystickButton intakeOutBtn = new JoystickButton(stickOperator, 3);
     intakeOutBtn.whileHeld(new IntakeSpinCommand(-0.5));
+
+    JoystickButton intakeExtBtn = new JoystickButton(stickDriver, 1);
+    intakeExtBtn.whileHeld(new IntakeExtDownCommand());
+    
 
   }
 

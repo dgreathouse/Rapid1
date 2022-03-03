@@ -23,16 +23,22 @@ public class ShooterShootCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shotTimer.reset();
     shotTimer.start();
     RobotContainer.shooter.setAngle(ShotData.getAngle());
-    RobotContainer.shooter.setSpeed(ShotData.getSpeed());
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(shotTimer.hasElapsed(1.5)){
-      RobotContainer.intake.spin(0.9);
+    if(!shotTimer.hasElapsed(0.15)){
+      RobotContainer.intake.spin(-0.7);
+    }else {
+      RobotContainer.shooter.setSpeed(ShotData.getSpeed());
+    }
+    if(shotTimer.hasElapsed(1)){
+      RobotContainer.intake.spin(0.7);
     }
     
   }

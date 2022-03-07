@@ -21,9 +21,9 @@ public class ShotData {
             case FRONT_LOW_CLOSE:
                 return SHOOTER.kFrontLowCloseAngle;
             case FRONT_HI_36INCH:
-                return SHOOTER.FRONT_HI_36IN_ANGLE;
+                return SHOOTER.kFrontHi36InAngle;
             case FRONT_HI_LAUNCHPAD:
-                return SHOOTER.FRONT_HI_LAUNCH_ANGLE;
+                return SHOOTER.kFrontHiLaunchAngle;
             default:
                 return SHOOTER.kFrontHiCloseAngle;
         }
@@ -40,11 +40,14 @@ public class ShotData {
             case FRONT_LOW_CLOSE:
                 return SHOOTER.kFrontLowCloseSpeed;
             case FRONT_HI_36INCH:
-                return SHOOTER.FRONT_HI_36IN_SPEED;
+                return SHOOTER.kFrontHi36InSpeed;
             case FRONT_HI_LAUNCHPAD:
-                return SHOOTER.FRONT_HI_LAUNCH_SPEED;
+                return SHOOTER.kFrontHiLaunchSpeed;
             default:
                 return SHOOTER.kFrontHiCloseSpeed;
         }
+    }
+    public static String getShotString(){
+        return "";
     }
 }

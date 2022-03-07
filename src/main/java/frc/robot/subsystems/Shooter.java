@@ -7,31 +7,30 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
+import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import frc.robot.RobotContainer;
 import frc.robot.Constants.CANIDS;
+import frc.robot.Constants.PWMPORTS;
 import frc.robot.commands.ShotData;
 
-public class Shooter extends SubsystemBase {
-  private TalonSRX leftMotor = new TalonSRX(CANIDS.kShooterLeft);
-  private TalonSRX rightMotor = new TalonSRX(CANIDS.kShooterRight);
-  private TalonSRX angleMotor = new TalonSRX(CANIDS.kShooterAngle);
 
+public class Shooter extends SubsystemBase {
+  private PWMVictorSPX leftMotor = new PWMVictorSPX(PWMPORTS.kLShooter);
+  private PWMVictorSPX rightMotor = new PWMVictorSPX(PWMPORTS.kRShooter);
+  private TalonSRX angleMotor = new TalonSRX(CANIDS.kShooterAngle);
+  private SlewRateLimiter slew = new SlewRateLimiter(.25);
 
 
   /** Creates a new Shooter. */
   public Shooter() {
-    
-    leftMotor.follow(rightMotor);
     angleMotor.config_kP(0, 150);
-    
   }
   public void spin(double _speed){
-    rightMotor.set(ControlMode.PercentOutput, _speed);
-
+    double spd = slew.calculate(_speed);
+    rightMotor.set( spd);
+    leftMotor.set( -spd);
   }
   public void setAngle(int _angle){
     //200 is Max
@@ -45,9 +44,6 @@ public class Shooter extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Shooter Offset", RobotContainer.stickOperator.getRawAxis(3));
-    SmartDashboard.putString("Shot Enum", ShotData.shot.toString());
-    SmartDashboard.putNumber("Shot Speed", ShotData.getSpeed());
-    SmartDashboard.putNumber("Shot Angle", ShotData.getAngle());
+    SmartDashboard.putString("ShotData", ShotData.shot.toString());
   }
 }

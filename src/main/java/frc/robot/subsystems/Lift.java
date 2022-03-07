@@ -4,14 +4,77 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.Constants.CANIDS;
+
+
 
 public class Lift extends SubsystemBase {
-  /** Creates a new Lift. */
-  public Lift() {}
+  CANSparkMax leftMotor = new CANSparkMax (CANIDS.kLiftLeft, MotorType.kBrushless);
+  CANSparkMax rightMotor = new CANSparkMax(CANIDS.kLiftRight, MotorType.kBrushless);
+  
+  DigitalInput leftUpLimit = new DigitalInput(0);
 
+  DigitalInput leftDownLimit = new DigitalInput(1);
+  DigitalInput rightUpLimit = new DigitalInput(2);
+  DigitalInput rightDownLimit = new DigitalInput(3);
+  /** Creates a new Lift. */
+  public Lift() {
+    leftMotor.setIdleMode(IdleMode.kBrake);
+    rightMotor.setIdleMode(IdleMode.kBrake);
+  }
+
+  /** Lower the climber arms
+   * 
+   * @param _speed Psitive speed is up and negative is down.
+   */
+
+  public void move(double _speed){
+    double leftSpeed = _speed;
+    double rightSpeed = -_speed;
+    double roll = RobotContainer.driveline.getRobotRoll();
+    double leftDis = leftMotor.getEncoder().getPosition();
+    double rightDis = rightMotor.getEncoder().getPosition();
+    if(_speed > 0){ // Roll compensation when lowering the lift hooks
+      leftSpeed = leftSpeed - (roll * 0.1);
+      rightSpeed = rightSpeed - (roll * 0.1);
+    }
+    // Distance limits up 
+    if(_speed < 0){
+      if(leftDis > 100){ leftSpeed = 0;}
+      if(rightDis > 100){ rightSpeed = 0;}
+    }
+    // Distance limits down
+    if(_speed < 0){
+      if(leftDis < 0) { leftSpeed = 0;}
+      if(rightDis < 0) { rightSpeed = 0;}
+    }
+    
+
+    leftMotor.set( leftSpeed);
+    rightMotor.set( rightSpeed);
+  }
+  public void resetEncoders(){
+    leftMotor.getEncoder().setPosition(0);
+    rightMotor.getEncoder().setPosition(0);
+  }
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Roll", RobotContainer.driveline.getRobotRoll());
+    SmartDashboard.putNumber("left Lift Dis", leftMotor.getEncoder().getPosition());
+    SmartDashboard.putNumber("right Lift Dis", rightMotor.getEncoder().getPosition());
+    // SmartDashboard.putBoolean("Left Up Climber Limit", leftUpLimit.get());
+    // SmartDashboard.putBoolean("Left Down Climber Limit", leftDownLimit.get());
+    // SmartDashboard.putBoolean("Right Up Climber Limit", rightUpLimit.get());
+    // SmartDashboard.putBoolean("Right Down Climber Limit", rightDownLimit.get());
   }
 }

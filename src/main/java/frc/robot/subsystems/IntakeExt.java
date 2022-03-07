@@ -12,13 +12,15 @@ import edu.wpi.first.wpilibj.PneumaticsBase;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CANIDS;
+import frc.robot.Constants.PWMPORTS;
+
 
 public class IntakeExt extends SubsystemBase {
   /** Creates a new IntakeExt. */
   
-  VictorSPX intakeExtMotor = new VictorSPX(CANIDS.kIntakeExtMotor);
+  Spark intakeExtMotor = new Spark(PWMPORTS.kIntakeExt);
   DoubleSolenoid intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   public IntakeExt() {
     
@@ -30,10 +32,10 @@ public class IntakeExt extends SubsystemBase {
   }
   public void down(){
     intakeSolenoid.set (Value.kForward);
-    intakeExtMotor.set(ControlMode.PercentOutput, 0.7);
+    intakeExtMotor.set( -1.0);
   }
   public void up() {
     intakeSolenoid.set (Value.kReverse);
-    intakeExtMotor.set(ControlMode.PercentOutput, 0.0);
+    intakeExtMotor.set(0.0);
   }
 }

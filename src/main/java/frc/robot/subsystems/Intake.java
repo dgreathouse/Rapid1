@@ -4,22 +4,25 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
 import com.revrobotics.Rev2mDistanceSensor.Unit;
 
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CANIDS;
+
 import frc.robot.Constants.INTAKE;
+import frc.robot.Constants.PWMPORTS;
 
 public class Intake extends SubsystemBase {
-  VictorSPX motor = new VictorSPX(CANIDS.kIntake);
+  Spark motor = new Spark(PWMPORTS.kIntake);
+  
   Rev2mDistanceSensor distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
   /** Creates a new Intake. */
   public Intake() {
+    
     distanceSensor.setEnabled(true);
     distanceSensor.setAutomaticMode(true);
     distanceSensor.setDistanceUnits(Unit.kMillimeters);
@@ -33,11 +36,11 @@ public class Intake extends SubsystemBase {
     }
   }
   public void spin(double _speed){
-    motor.set(ControlMode.PercentOutput, _speed);
+    motor.set( _speed);
   }
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Intake Distance Sensor (mm)", distanceSensor.getRange());
+    //SmartDashboard.putNumber("Intake Distance Sensor (mm)", distanceSensor.getRange());
     
   }
 }

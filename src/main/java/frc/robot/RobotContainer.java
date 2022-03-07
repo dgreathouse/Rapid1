@@ -26,6 +26,7 @@ import frc.robot.commands.IntakeExtDefaultCommand;
 import frc.robot.commands.IntakeExtDownCommand;
 import frc.robot.commands.IntakeSpinCommand;
 import frc.robot.commands.LiftDefaultCommand;
+import frc.robot.commands.LiftMoveCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterShootCommand;
 import frc.robot.subsystems.Driveline;
@@ -107,6 +108,8 @@ public class RobotContainer {
     JoystickButton intakeExtBtn = new JoystickButton(stickDriver, 1);
     intakeExtBtn.whileHeld(new IntakeExtDownCommand());
     
+    JoystickButton liftMoveBtn = new JoystickButton(stickDriver, 5);
+    liftMoveBtn.whileHeld(new LiftMoveCommand());
 
   }
 

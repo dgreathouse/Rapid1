@@ -6,28 +6,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Lift;
 
-public class LiftDefaultCommand extends CommandBase {
-
-  /** Creates a new LiftDefaultCommand. */
-  public LiftDefaultCommand(Lift _lift) {
-    addRequirements(_lift);
-    // Use addRequirements() here to declare subsystem dependencies.
+public class LiftMoveCommand extends CommandBase {
+  /** Creates a new LiftMoveCommand. */
+  public LiftMoveCommand() {
+    addRequirements(RobotContainer.lift);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.driveline.resetGyro();
+    RobotContainer.lift.resetEncoders();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-
-    
-  
-    
+    double speed = RobotContainer.stickOperator.getY();
+    RobotContainer.lift.move(speed);
   }
 
   // Called once the command ends or is interrupted.

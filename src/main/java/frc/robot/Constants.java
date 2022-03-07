@@ -108,7 +108,16 @@ public final class Constants {
         public static final int kShooterAngle = 23;
 
         public static final int kIntake = 30;
-        public static final int kIntakeExtMotor = 40;
+        public static final int kIntakeExtMotor = 31;
+        public static final int kLiftLeft = 60;
+        public static final int kLiftRight = 61;
+
+    }
+    public static final class PWMPORTS{
+        public static final int kIntake = 5;
+        public static final int kIntakeExt = 1;
+        public static final int kLShooter = 2;
+        public static final int kRShooter = 3;
     }
 
     public static final class INTAKE {
@@ -128,11 +137,11 @@ public final class Constants {
         public static final double kFrontLowCloseSpeed = 0.45;
         public static final int kFrontLowCloseAngle = -140;
 
-        public static final double FRONT_HI_36IN_SPEED = 0.7;
-        public static final int FRONT_HI_36IN_ANGLE = -140;
+        public static final double kFrontHi36InSpeed = 0.7;
+        public static final int kFrontHi36InAngle = -140;
 
-        public static final double FRONT_HI_LAUNCH_SPEED = 1;
-        public static final int FRONT_HI_LAUNCH_ANGLE = -200;
+        public static final double kFrontHiLaunchSpeed = 1;
+        public static final int kFrontHiLaunchAngle = -200;
 
     }
 }

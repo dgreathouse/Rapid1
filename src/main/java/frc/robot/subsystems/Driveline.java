@@ -50,14 +50,14 @@ public class Driveline extends SubsystemBase {
         m_leftBack.getState(),
         m_rightFront.getState(),
         m_rightBack.getState());
-    SmartDashboard.putNumber("LF_Vel", m_leftFront.getDriveVelocityInMPS());
-    SmartDashboard.putNumber("LB_Vel", m_leftBack.getDriveVelocityInMPS());
-    SmartDashboard.putNumber("RF_Vel", m_rightFront.getDriveVelocityInMPS());
-    SmartDashboard.putNumber("RB_Vel", m_rightBack.getDriveVelocityInMPS());
-    SmartDashboard.putNumber("LF_Ang", m_leftFront.getSteerMotorCnts());
-    SmartDashboard.putNumber("LB_Ang", m_leftBack.getSteerMotorCnts());
-    SmartDashboard.putNumber("RF_Ang", m_rightFront.getSteerMotorCnts());
-    SmartDashboard.putNumber("RB_Ang", m_rightBack.getSteerMotorCnts());
+    // SmartDashboard.putNumber("LF_Vel", m_leftFront.getDriveVelocityInMPS());
+    // SmartDashboard.putNumber("LB_Vel", m_leftBack.getDriveVelocityInMPS());
+    // SmartDashboard.putNumber("RF_Vel", m_rightFront.getDriveVelocityInMPS());
+    // SmartDashboard.putNumber("RB_Vel", m_rightBack.getDriveVelocityInMPS());
+    // SmartDashboard.putNumber("LF_Ang", m_leftFront.getSteerMotorCnts());
+    // SmartDashboard.putNumber("LB_Ang", m_leftBack.getSteerMotorCnts());
+    // SmartDashboard.putNumber("RF_Ang", m_rightFront.getSteerMotorCnts());
+    // SmartDashboard.putNumber("RB_Ang", m_rightBack.getSteerMotorCnts());
 
     // SmartDashboard.putNumber("LF_Ang_AbsEnc", m_leftFront.getSteerEncAngleDeg());
     // SmartDashboard.putNumber("LB_Ang_AbsEnc", m_leftBack.getSteerEncAngleDeg());
@@ -132,8 +132,8 @@ public class Driveline extends SubsystemBase {
     m_rightFront.setDesiredStateAutoMotionMagic(swerveModuleStates[1], _distanceIn);
     m_leftBack.setDesiredStateAutoMotionMagic(swerveModuleStates[2], _distanceIn);
     m_rightBack.setDesiredStateAutoMotionMagic(swerveModuleStates[3], _distanceIn);
-    SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
-    SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
+  //  SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
+ //   SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
 
   }
 
@@ -187,6 +187,9 @@ public class Driveline extends SubsystemBase {
   }
   public double getRobotAngle(){
     return -m_gyro.getAngle();
+  }
+  public double getRobotRoll(){
+    return m_gyro.getRoll();
   }
   public void resetGyro(){
     m_gyro.reset();

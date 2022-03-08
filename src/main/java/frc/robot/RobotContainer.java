@@ -21,6 +21,7 @@ import frc.robot.commands.AutoT2C3S2;
 import frc.robot.commands.AutoT2C3S2C24;
 import frc.robot.commands.AutoT2S1C24;
 import frc.robot.commands.DrivelineDefaultCommand;
+import frc.robot.commands.FieldOrientedResetCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeExtDefaultCommand;
 import frc.robot.commands.IntakeExtDownCommand;
@@ -111,6 +112,8 @@ public class RobotContainer {
     JoystickButton liftMoveBtn = new JoystickButton(stickDriver, 5);
     liftMoveBtn.whileHeld(new LiftMoveCommand());
 
+    JoystickButton resetGyroBtn = new JoystickButton(stickDriver, 12);
+    resetGyroBtn.whenPressed(new FieldOrientedResetCommand());
   }
 
   /**

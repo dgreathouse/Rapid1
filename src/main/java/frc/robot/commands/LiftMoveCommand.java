@@ -18,6 +18,7 @@ public class LiftMoveCommand extends CommandBase {
   public void initialize() {
     RobotContainer.driveline.resetGyro();
     RobotContainer.lift.resetEncoders();
+    RobotContainer.lift.setRollOffset(RobotContainer.driveline.getRobotRoll());
   }
 
   // Called every time the scheduler runs while the command is scheduled.

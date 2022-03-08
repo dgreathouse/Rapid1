@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
   private PWMVictorSPX leftMotor = new PWMVictorSPX(PWMPORTS.kLShooter);
   private PWMVictorSPX rightMotor = new PWMVictorSPX(PWMPORTS.kRShooter);
   private TalonSRX angleMotor = new TalonSRX(CANIDS.kShooterAngle);
-  private SlewRateLimiter slew = new SlewRateLimiter(.25);
+  private SlewRateLimiter slew = new SlewRateLimiter(2);
 
 
   /** Creates a new Shooter. */

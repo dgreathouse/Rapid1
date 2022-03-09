@@ -48,7 +48,7 @@ public class Lift extends SubsystemBase {
     double rightDis = rightMotor.getEncoder().getPosition();
     if(_speed > 0){ // Roll compensation when lowering the lift hooks
       leftSpeed = leftSpeed - (roll * 0.05);
-      rightSpeed = rightSpeed - (roll * 0.05);
+      rightSpeed = rightSpeed + (roll * 0.05);
     }
     // Distance limits up 
     if(_speed < 0){

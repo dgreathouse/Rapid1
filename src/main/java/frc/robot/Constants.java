@@ -131,7 +131,7 @@ public final class Constants {
         public static final double kBackLowSpeed = 0.5;
         public static final int kBackLowAngle = 0;
 
-        public static final double kFrontHiCloseSpeed = 0.60;
+        public static final double kFrontHiCloseSpeed = 0.720;
         public static final int kFrontHiCloseAngle = -100;
 
         public static final double kFrontLowCloseSpeed = 0.45;

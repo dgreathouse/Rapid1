@@ -29,7 +29,12 @@ import frc.robot.commands.IntakeSpinCommand;
 import frc.robot.commands.LiftDefaultCommand;
 import frc.robot.commands.LiftMoveCommand;
 import frc.robot.commands.ShooterDefaultCommand;
+import frc.robot.commands.ShooterShootBackHiCommand;
+import frc.robot.commands.ShooterShootBackLowCommand;
 import frc.robot.commands.ShooterShootCommand;
+import frc.robot.commands.ShooterShootFrontFarCommand;
+import frc.robot.commands.ShooterShootFrontHiCommand;
+import frc.robot.commands.ShooterShootFrontLowCommand;
 import frc.robot.subsystems.Driveline;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeExt;
@@ -114,6 +119,21 @@ public class RobotContainer {
 
     JoystickButton resetGyroBtn = new JoystickButton(stickDriver, 12);
     resetGyroBtn.whenPressed(new FieldOrientedResetCommand());
+
+    JoystickButton ShooterFrontHiBtn = new JoystickButton(stickOperator, 9);
+    ShooterFrontHiBtn.whenPressed(new ShooterShootFrontHiCommand());
+
+    JoystickButton ShooterFrontLowBtn = new JoystickButton(stickOperator, 8);
+    ShooterFrontLowBtn.whenPressed(new ShooterShootFrontLowCommand());
+
+    JoystickButton ShooterBackHiBtn = new JoystickButton(stickOperator, 12);
+    ShooterBackHiBtn.whenPressed(new ShooterShootBackHiCommand());
+
+    JoystickButton ShooterBackLowBtn = new JoystickButton(stickOperator, 11);
+    ShooterBackLowBtn.whenPressed(new ShooterShootBackLowCommand());
+
+    JoystickButton ShooterFrontFarBtn = new JoystickButton(stickOperator, 9);
+    ShooterFrontFarBtn.whenPressed(new ShooterShootFrontFarCommand());
   }
 
   /**

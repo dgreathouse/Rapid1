@@ -24,19 +24,7 @@ public class ShooterDefaultCommand extends CommandBase {
   @Override
   public void execute() {
     RobotContainer.shooter.spin(-0.05);
-    if(RobotContainer.stickOperator.getRawButtonPressed(12)){
-      ShotData.shot = ShotEnum.BACK_HI;
-    }else if(RobotContainer.stickOperator.getRawButtonPressed(11)){
-      ShotData.shot = ShotEnum.BACK_LOW;
-    }else if(RobotContainer.stickOperator.getRawButtonPressed(8)){
-      ShotData.shot = ShotEnum.FRONT_HI_CLOSE;
-    }else if(RobotContainer.stickOperator.getRawButtonPressed(9)){
-      ShotData.shot = ShotEnum.FRONT_HI_36INCH;
-    }else if(RobotContainer.stickOperator.getRawButtonPressed(10)){
-      ShotData.shot = ShotEnum.FRONT_HI_LAUNCHPAD;
-    }else if(RobotContainer.stickOperator.getRawButtonPressed(7)){
-      ShotData.shot = ShotEnum.FRONT_LOW_CLOSE;
-    }
+
 
   }
 

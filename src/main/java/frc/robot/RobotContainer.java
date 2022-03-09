@@ -32,6 +32,7 @@ import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterShootBackHiCommand;
 import frc.robot.commands.ShooterShootBackLowCommand;
 import frc.robot.commands.ShooterShootCommand;
+import frc.robot.commands.ShooterShootFrontExtraFarCommand;
 import frc.robot.commands.ShooterShootFrontFarCommand;
 import frc.robot.commands.ShooterShootFrontHiCommand;
 import frc.robot.commands.ShooterShootFrontLowCommand;
@@ -134,6 +135,9 @@ public class RobotContainer {
 
     JoystickButton ShooterFrontFarBtn = new JoystickButton(stickOperator, 9);
     ShooterFrontFarBtn.whenPressed(new ShooterShootFrontFarCommand());
+
+    JoystickButton ShooterFrontExtraFar = new JoystickButton(stickOperator, 10);
+    ShooterFrontExtraFar.whenPressed(new ShooterShootFrontExtraFarCommand());
   }
 
   /**

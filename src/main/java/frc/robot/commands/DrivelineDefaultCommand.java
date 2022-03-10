@@ -38,11 +38,6 @@ public class DrivelineDefaultCommand extends CommandBase {
     double y = -RobotContainer.stickDriver.getRawAxis(1);
     double twist = RobotContainer.stickDriver.getRawAxis(2);
 
-    if (RobotContainer.stickDriver.getRawButton(7)) {
-      isFieldOrientedMode = true;
-    } else if (RobotContainer.stickDriver.getRawButton(8)) {
-      isFieldOrientedMode = false;
-    }
     // Limit the X,Y Rotation values so minor changes do not make motors move
     x = (Math.abs(x) > OI.kDeadband) ? x - OI.kDeadband : 0;
     y = (Math.abs(y) > OI.kDeadband) ? y - OI.kDeadband : 0;
@@ -52,10 +47,10 @@ public class DrivelineDefaultCommand extends CommandBase {
     // y = ySRL.calculate(y);
     // twist = twistSRL.calculate(twist);
 
-    RobotContainer.driveline.drive(x, y, twist, isFieldOrientedMode);
-    SmartDashboard.putNumber("drvX", x);
-    SmartDashboard.putNumber("drvY", y);
-    SmartDashboard.putNumber("drvTwist", twist);
+    RobotContainer.driveline.drive(x, y, twist, RobotContainer.driveline.getFieldOrientedModeActive());
+    //SmartDashboard.putNumber("drvX", x);
+    //SmartDashboard.putNumber("drvY", y);
+    //SmartDashboard.putNumber("drvTwist", twist);
   }
 
   // Called once the command ends or is interrupted.

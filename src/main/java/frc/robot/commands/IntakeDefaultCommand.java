@@ -23,14 +23,14 @@ public class IntakeDefaultCommand extends CommandBase {
   @Override
   public void execute() {
     if(RobotContainer.intake.isCargoInIntake()){
-      RobotContainer.intake.spin(0.8);
+      RobotContainer.intake.spin(0.9);
     }else {
       RobotContainer.intake.spin(0);
     }
     if(RobotContainer.stickOperator.getRawButton(3)){
-      RobotContainer.intake.spin(0.5);
+      RobotContainer.intake.spin(0.8);
     }else if(RobotContainer.stickOperator.getRawButton(5)){
-      RobotContainer.intake.spin(-0.5);
+      RobotContainer.intake.spin(-0.8);
     }
   }
 

@@ -21,6 +21,8 @@ import frc.robot.commands.AutoT2C3S2;
 import frc.robot.commands.AutoT2C3S2C24;
 import frc.robot.commands.AutoT2S1C24;
 import frc.robot.commands.DrivelineDefaultCommand;
+import frc.robot.commands.FieldOrientedModeActiveCommand;
+import frc.robot.commands.FieldOrientedModeDisableCommand;
 import frc.robot.commands.FieldOrientedResetCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeExtDefaultCommand;
@@ -138,6 +140,13 @@ public class RobotContainer {
 
     JoystickButton ShooterFrontExtraFar = new JoystickButton(stickOperator, 10);
     ShooterFrontExtraFar.whenPressed(new ShooterShootFrontExtraFarCommand());
+
+    JoystickButton DrivelineFieldOrientedModeActive = new JoystickButton(stickDriver, 7);
+    DrivelineFieldOrientedModeActive.whenPressed(new FieldOrientedModeActiveCommand());
+
+    JoystickButton DrivelineFieldOrientedModeDisable = new JoystickButton(stickDriver, 8);
+    DrivelineFieldOrientedModeDisable.whenPressed(new FieldOrientedModeDisableCommand());
+
   }
 
   /**

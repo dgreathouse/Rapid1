@@ -35,7 +35,7 @@ public class Driveline extends SubsystemBase {
   private final AHRS m_gyro = new AHRS(Port.kMXP);
 
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DRIVE.kDriveKinematics, m_gyro.getRotation2d());
-
+  private boolean isFieldOrientedMode = false;
   /** Creates a new Driveline. */
   public Driveline() {
 
@@ -194,5 +194,11 @@ public class Driveline extends SubsystemBase {
   }
   public void resetGyro(){
     m_gyro.reset();
+  }
+  public void setFieldOrientedMode(boolean mode){
+    isFieldOrientedMode = mode;
+  }
+  public boolean getFieldOrientedModeActive(){
+    return isFieldOrientedMode;
   }
 }

@@ -26,10 +26,10 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {
     angleMotor.configOpenloopRamp(.25);
-    angleMotor.config_kP(0, 100);
+    angleMotor.config_kP(0, 50);
   }
   public void spin(double _speed){
-    double spd = slew.calculate(_speed);
+    double spd = _speed;//slew.calculate(_speed);
     rightMotor.set( spd);
     leftMotor.set( -spd);
   }

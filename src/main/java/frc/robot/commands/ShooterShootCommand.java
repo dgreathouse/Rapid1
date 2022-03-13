@@ -34,6 +34,7 @@ public class ShooterShootCommand extends CommandBase {
   public void execute() {
     if(!shotTimer.hasElapsed(0.25)){
       RobotContainer.intake.spin(-1.0);
+      RobotContainer.shooter.setSpeed(-0.2);
     }else {
       RobotContainer.shooter.setSpeed(ShotData.getSpeed());
       RobotContainer.intake.spin(0);

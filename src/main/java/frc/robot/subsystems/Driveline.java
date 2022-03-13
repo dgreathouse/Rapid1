@@ -136,7 +136,23 @@ public class Driveline extends SubsystemBase {
  //   SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
 
   }
+  public void autoDrive(double _xSpeed, double _ySpeed) {
+    double xSpeed = _xSpeed * DRIVE.kMaxSpeedMetersPerSecond;
+    double ySpeed = -_ySpeed * DRIVE.kMaxSpeedMetersPerSecond;
 
+    double rot = RobotContainer.driveline.getRobotAngle() * 0.001;
+    SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics
+        .toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, rot));
+    // Normalize the wheel speeds
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DRIVE.kMaxSpeedMetersPerSecond);
+    m_leftFront.setDesiredState(swerveModuleStates[0], false);
+    m_rightFront.setDesiredState(swerveModuleStates[1], false);
+    m_leftBack.setDesiredState(swerveModuleStates[2], false);
+    m_rightBack.setDesiredState(swerveModuleStates[3], false);
+  //  SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
+ //   SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
+
+  }
   /**
    * Autonomous Rotate wheel while driving speeds disabled
    * 

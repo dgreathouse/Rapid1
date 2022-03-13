@@ -19,6 +19,7 @@ import frc.robot.commands.AutoRedSHMC1SH;
 import frc.robot.commands.AutoT1C1S2;
 import frc.robot.commands.AutoT2C3S2;
 import frc.robot.commands.AutoT2C3S2C24;
+import frc.robot.commands.AutoT2C3S2C2S1;
 import frc.robot.commands.AutoT2S1C24;
 import frc.robot.commands.DrivelineDefaultCommand;
 import frc.robot.commands.FieldOrientedModeActiveCommand;
@@ -86,7 +87,7 @@ public class RobotContainer {
 
     autoChooser.addOption("Test", new AutoRedSHMC1SH());
     autoChooser.addOption(AutoLeaveTarmac.name, new AutoLeaveTarmac());
-
+autoChooser.addOption(AutoT2C3S2C2S1.name, new AutoT2C3S2C2S1());
     autoChooser.addOption(AutoT1C1S2.name, new AutoT1C1S2());
     autoChooser.addOption(AutoT2C3S2.name, new AutoT2C3S2());
     autoChooser.addOption(AutoT2C3S2C24.name, new AutoT2C3S2C24());
@@ -108,11 +109,17 @@ public class RobotContainer {
     JoystickButton shotTrigger = new JoystickButton(stickOperator, 1);
     shotTrigger.whileHeld(new ShooterShootCommand());
 
-    JoystickButton intakeInBtn = new JoystickButton(stickOperator, 2);
-    intakeInBtn.whileHeld(new IntakeSpinCommand(0.5));
+    JoystickButton intakeOut1Btn = new JoystickButton(stickOperator, 4);
+    intakeOut1Btn.whileHeld(new IntakeSpinCommand(-1));
 
-    JoystickButton intakeOutBtn = new JoystickButton(stickOperator, 3);
-    intakeOutBtn.whileHeld(new IntakeSpinCommand(-0.5));
+    JoystickButton intakeOut2Btn = new JoystickButton(stickOperator, 3);
+    intakeOut2Btn.whileHeld(new IntakeSpinCommand(-1));
+
+    JoystickButton intakeIn1Btn = new JoystickButton(stickOperator, 5);
+    intakeIn1Btn.whileHeld(new IntakeSpinCommand(1));
+
+    JoystickButton intakeIn2Btn = new JoystickButton(stickOperator, 6);
+    intakeIn2Btn.whileHeld(new IntakeSpinCommand(1));
 
     JoystickButton intakeExtBtn = new JoystickButton(stickDriver, 1);
     intakeExtBtn.whileHeld(new IntakeExtDownCommand());
@@ -123,10 +130,10 @@ public class RobotContainer {
     JoystickButton resetGyroBtn = new JoystickButton(stickDriver, 12);
     resetGyroBtn.whenPressed(new FieldOrientedResetCommand());
 
-    JoystickButton ShooterFrontHiBtn = new JoystickButton(stickOperator, 9);
+    JoystickButton ShooterFrontHiBtn = new JoystickButton(stickOperator, 8);
     ShooterFrontHiBtn.whenPressed(new ShooterShootFrontHiCommand());
 
-    JoystickButton ShooterFrontLowBtn = new JoystickButton(stickOperator, 8);
+    JoystickButton ShooterFrontLowBtn = new JoystickButton(stickOperator, 7);
     ShooterFrontLowBtn.whenPressed(new ShooterShootFrontLowCommand());
 
     JoystickButton ShooterBackHiBtn = new JoystickButton(stickOperator, 12);

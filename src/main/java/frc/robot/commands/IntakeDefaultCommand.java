@@ -14,6 +14,9 @@ public class IntakeDefaultCommand extends CommandBase {
     addRequirements(_intake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
+  public IntakeDefaultCommand(){
+    
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -27,11 +30,7 @@ public class IntakeDefaultCommand extends CommandBase {
     }else {
       RobotContainer.intake.spin(0);
     }
-    if(RobotContainer.stickOperator.getRawButton(3)){
-      RobotContainer.intake.spin(0.8);
-    }else if(RobotContainer.stickOperator.getRawButton(5)){
-      RobotContainer.intake.spin(-0.8);
-    }
+
   }
 
   // Called once the command ends or is interrupted.

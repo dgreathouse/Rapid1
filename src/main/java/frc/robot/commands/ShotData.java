@@ -24,6 +24,8 @@ public class ShotData {
                 return SHOOTER.kFrontHi36InAngle;
             case FRONT_HI_LAUNCHPAD:
                 return SHOOTER.kFrontHiLaunchAngle;
+            case FRONT_AUTO_LONG:
+                return SHOOTER.kFrontAutoLongAngle;
             default:
                 return SHOOTER.kFrontHiCloseAngle;
         }
@@ -43,6 +45,8 @@ public class ShotData {
                 return SHOOTER.kFrontHi36InSpeed;
             case FRONT_HI_LAUNCHPAD:
                 return SHOOTER.kFrontHiLaunchSpeed;
+            case FRONT_AUTO_LONG:
+                return SHOOTER.kFrontAutoLongSpeed;
             default:
                 return SHOOTER.kFrontHiCloseSpeed;
         }

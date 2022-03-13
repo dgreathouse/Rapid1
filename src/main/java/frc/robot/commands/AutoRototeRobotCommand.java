@@ -19,7 +19,7 @@ public class AutoRototeRobotCommand extends PIDCommand {
   public AutoRototeRobotCommand(double _rotationSpeed, double _angleDeg, double _timeOut) {
     super(
         // The controller that the command will use
-        new PIDController(.1, 0, 0),
+        new PIDController(.15, 0.01, 0),
         // This should return the measurement
         () -> RobotContainer.driveline.getRobotAngle(),
         // This should return the setpoint (can also be a constant)

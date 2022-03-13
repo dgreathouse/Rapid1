@@ -64,13 +64,12 @@ public final class Constants {
         // Starting kD is typically 10 x kP
         public static final double kDriveMotionMagic_kD = 0.0;
         // kF 50% speed. (0.50*1023) / (kMaxDriveVelUnitsPer100ms * 0.5) = 0.047
-        public static final double kDriveMotionMagic_kF = 0.2; 
+        public static final double kDriveMotionMagic_kF = 0.5; 
         // Set Cruise Velocit to 1/2 of max like kF. 
         public static final double kDriveMotionMagic_CruiseVel = 10888;
         // Set Accel to 1/2 of Max for 1 second ramp up.
         public static final double kDriveMotionMagic_Accel = 500;
         public static final int kDriveMotionMagic_Smoothing = 1;
-
 
         public static final double kSteerMotEncoderCountsPerRev = 2048.0;
         public static final double kSteerRatio = 15.43;
@@ -125,23 +124,26 @@ public final class Constants {
     }
 
     public static final class SHOOTER {
-        public static final double kBackHiSpeed = 0.7;
+        public static final double kBackHiSpeed = 0.70;
         public static final int kBackHiAngle = 0;
 
         public static final double kBackLowSpeed = 0.5;
         public static final int kBackLowAngle = 0;
 
-        public static final double kFrontHiCloseSpeed = 0.720;
-        public static final int kFrontHiCloseAngle = -100;
+        public static final double kFrontHiCloseSpeed = 0.650;
+        public static final int kFrontHiCloseAngle = -110;
 
         public static final double kFrontLowCloseSpeed = 0.45;
         public static final int kFrontLowCloseAngle = -140;
 
-        public static final double kFrontHi36InSpeed = 0.7;
-        public static final int kFrontHi36InAngle = -140;
+        public static final double kFrontHi36InSpeed = 0.72;
+        public static final int kFrontHi36InAngle = -130;
 
         public static final double kFrontHiLaunchSpeed = 1;
-        public static final int kFrontHiLaunchAngle = -200;
+        public static final int kFrontHiLaunchAngle = -250;
+
+        public static final double kFrontAutoLongSpeed = 0.9;
+        public static final int kFrontAutoLongAngle = -140;
 
     }
 }

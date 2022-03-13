@@ -38,9 +38,14 @@ public class AutoDriveCommand extends CommandBase {
       RobotContainer.driveline.autoRotateWheels(m_xSpeed, m_ySpeed);
       RobotContainer.driveline.resetSwerveDriveEncoders();
     }else {
+      if(RobotContainer.intake.isCargoInIntake()){
+        RobotContainer.intake.spin(1.0);
+      }else {
+        RobotContainer.intake.spin(0);
+      }
       // This will maintain the wheels at angle and drive to distance using Motion Magic
-      RobotContainer.driveline.autoDrive(m_xSpeed, m_ySpeed, m_distanceIn);
-      double err = Math.abs(RobotContainer.driveline.getAverageDistanceInInches() - m_distanceIn);
+      RobotContainer.driveline.autoDrive(m_xSpeed, m_ySpeed);
+      double err = Math.abs(Math.abs(RobotContainer.driveline.getAverageDistanceInInches()) - m_distanceIn);
       if(err < 1.0){
         isFinished = true;
         // Do this once so the Drive wheels are set to percent output and set off while wheels maintain angle.

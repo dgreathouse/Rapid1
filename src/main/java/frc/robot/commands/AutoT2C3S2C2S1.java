@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.ShotEnum;
 
@@ -12,7 +11,7 @@ import frc.ShotEnum;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoT2C3S2C2S1 extends SequentialCommandGroup {
-  public static String name = "T2 C3 S2 C2 S1";
+  public static String name = "T2 S1 C32 S2";
   /** Creates a new AutoT2C3S2C3S1. */
   public AutoT2C3S2C2S1() {
     // Add your commands in the addCommands() call, e.g.

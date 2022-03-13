@@ -8,6 +8,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Util;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.Driveline;
 
@@ -39,9 +40,9 @@ public class DrivelineDefaultCommand extends CommandBase {
     double twist = RobotContainer.stickDriver.getRawAxis(2);
 
     // Limit the X,Y Rotation values so minor changes do not make motors move
-    x = (Math.abs(x) > OI.kDeadband) ? x - OI.kDeadband : 0;
-    y = (Math.abs(y) > OI.kDeadband) ? y - OI.kDeadband : 0;
-    twist = (Math.abs(twist) > OI.kDeadband) ? twist - OI.kDeadband : 0;
+    x =  Util.deadband(x, OI.kDeadband);//(Math.abs(x) > OI.kDeadband) ? x - OI.kDeadband : 0;
+    y =  Util.deadband(y, OI.kDeadband);//(Math.abs(y) > OI.kDeadband) ? y - OI.kDeadband : 0;
+    twist = Util.deadband(twist, OI.kDeadband);// (Math.abs(twist) > OI.kDeadband) ? twist - OI.kDeadband : 0;
     // Slew Rate Limit X,Y,Rotation values so drastic changes do not happen
     // x = xSRL.calculate(x);
     // y = ySRL.calculate(y);

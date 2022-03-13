@@ -85,7 +85,7 @@ public final class Constants {
     }
 
     public static final class OI {
-        public static final double kDeadband = 0.2;
+        public static final double kDeadband = 0.1;
     }
 
     public static final class CANIDS {

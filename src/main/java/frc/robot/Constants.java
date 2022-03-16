@@ -85,7 +85,7 @@ public final class Constants {
     }
 
     public static final class OI {
-        public static final double kDeadband = 0.1;
+        public static final double kDeadband = 0.2;
     }
 
     public static final class CANIDS {
@@ -127,14 +127,14 @@ public final class Constants {
         public static final double kBackHiSpeed = 0.70;
         public static final int kBackHiAngle = 0;
 
-        public static final double kBackLowSpeed = 0.5;
+        public static final double kBackLowSpeed = 0.4;
         public static final int kBackLowAngle = 0;
 
-        public static final double kFrontHiCloseSpeed = 0.650;
-        public static final int kFrontHiCloseAngle = -110;
+        public static final double kFrontHiCloseSpeed = 0.70;
+        public static final int kFrontHiCloseAngle = -95;
 
-        public static final double kFrontLowCloseSpeed = 0.45;
-        public static final int kFrontLowCloseAngle = -140;
+        public static final double kFrontLowCloseSpeed = 0.5;
+        public static final int kFrontLowCloseAngle = -130;
 
         public static final double kFrontHi36InSpeed = 0.72;
         public static final int kFrontHi36InAngle = -130;
@@ -142,8 +142,8 @@ public final class Constants {
         public static final double kFrontHiLaunchSpeed = 1;
         public static final int kFrontHiLaunchAngle = -250;
 
-        public static final double kFrontAutoLongSpeed = 0.9;
-        public static final int kFrontAutoLongAngle = -140;
+        public static final double kFrontAutoLongSpeed = 0.8;
+        public static final int kFrontAutoLongAngle = -150;
 
     }
 }

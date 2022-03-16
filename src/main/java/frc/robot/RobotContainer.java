@@ -21,6 +21,7 @@ import frc.robot.commands.AutoT2C3S2;
 import frc.robot.commands.AutoT2C3S2C24;
 import frc.robot.commands.AutoT2C3S2C2S1;
 import frc.robot.commands.AutoT2S1C24;
+import frc.robot.commands.AutoT2S1C3S1;
 import frc.robot.commands.DrivelineDefaultCommand;
 import frc.robot.commands.FieldOrientedModeActiveCommand;
 import frc.robot.commands.FieldOrientedModeDisableCommand;
@@ -92,6 +93,7 @@ autoChooser.addOption(AutoT2C3S2C2S1.name, new AutoT2C3S2C2S1());
     autoChooser.addOption(AutoT2C3S2.name, new AutoT2C3S2());
     autoChooser.addOption(AutoT2C3S2C24.name, new AutoT2C3S2C24());
     autoChooser.addOption(AutoT2S1C24.name, new AutoT2S1C24());
+    autoChooser.addOption(AutoT2S1C3S1.name, new AutoT2S1C3S1());
 
     autoChooser.setDefaultOption(AutoDoNothing.name, new AutoDoNothing());
 

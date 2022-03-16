@@ -72,6 +72,7 @@ public class Driveline extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+    m_gyro.getAngle();
   }
 
   /**

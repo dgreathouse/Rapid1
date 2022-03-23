@@ -31,7 +31,7 @@ public class Driveline extends SubsystemBase {
       CANIDS.kDriveline_RBSteerEnc, InvertType.InvertMotorOutput, InvertType.InvertMotorOutput,
       SWERVE.kRBAbsoluteOffsetInDegrees);
 
-  private final AHRS m_gyro = new AHRS(SerialPort.Port.kUSB);
+  private final AHRS m_gyro = new AHRS(SerialPort.Port.kMXP);
   
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DRIVE.kDriveKinematics, m_gyro.getRotation2d());
   private boolean isFieldOrientedMode = false;
@@ -49,7 +49,6 @@ public class Driveline extends SubsystemBase {
         m_leftBack.getState(),
         m_rightFront.getState(),
         m_rightBack.getState());
-
   }
 
   public Pose2d getPose() {
@@ -135,8 +134,6 @@ public class Driveline extends SubsystemBase {
     m_rightFront.setDesiredState(swerveModuleStates[1], false);
     m_leftBack.setDesiredState(swerveModuleStates[2], false);
     m_rightBack.setDesiredState(swerveModuleStates[3], false);
-
-
   }
   /**
    * Autonomous Rotate wheel while driving speeds disabled
@@ -201,5 +198,12 @@ public class Driveline extends SubsystemBase {
   }
   public boolean getFieldOrientedModeActive(){
     return isFieldOrientedMode;
+  }
+  public double getCompassHeading(){
+    
+    return m_gyro.getCompassHeading();
+  }
+  public AHRS getGyro(){
+    return m_gyro;
   }
 }

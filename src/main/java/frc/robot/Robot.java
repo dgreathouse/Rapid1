@@ -4,9 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.ROBOT;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -16,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  Timer gyroTimer;
   private RobotContainer m_robotContainer;
   public Robot(){
     //super(0.04);
@@ -31,6 +36,19 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     
     m_robotContainer = new RobotContainer();
+    gyroTimer = new Timer();
+    gyroTimer.start();
+    
+    while(!gyroTimer.hasElapsed(5) && RobotContainer.driveline.getGyro().isMagnetometerCalibrated()){
+      
+    }
+    Alliance alliance =  DriverStation.getAlliance();
+    double compassOffset = ROBOT.kFieldBlueCompassHeadingOffset;
+    if(alliance == Alliance.Red){
+      compassOffset += 180;
+    }
+    RobotContainer.driveline.getGyro().setAngleAdjustment(RobotContainer.driveline.getCompassHeading() + compassOffset);
+
   }
 
   /**
@@ -48,7 +66,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    //SmartDashboard.putNumber("Angle", RobotContainer.driveline.getRobotAngle());
+    SmartDashboard.putNumber("Robot Angle", RobotContainer.driveline.getRobotAngle());
+    SmartDashboard.putNumber("Compass", RobotContainer.driveline.getCompassHeading());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

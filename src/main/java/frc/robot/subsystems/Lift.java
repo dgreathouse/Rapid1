@@ -13,24 +13,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.CANIDS;
+import frc.robot.Constants.LIFT;
 
 
 
 public class Lift extends SubsystemBase {
   CANSparkMax leftMotor = new CANSparkMax (CANIDS.kLiftLeft, MotorType.kBrushless);
   CANSparkMax rightMotor = new CANSparkMax(CANIDS.kLiftRight, MotorType.kBrushless);
-  
-  DigitalInput leftUpLimit = new DigitalInput(0);
-
-  DigitalInput leftDownLimit = new DigitalInput(1);
-  DigitalInput rightUpLimit = new DigitalInput(2);
-  DigitalInput rightDownLimit = new DigitalInput(3);
 
   double m_rollOffset = 0;
+  boolean m_liftInitiated = false; 
   /** Creates a new Lift. */
   public Lift() {
     leftMotor.setIdleMode(IdleMode.kBrake);
     rightMotor.setIdleMode(IdleMode.kBrake);
+    leftMotor.setOpenLoopRampRate(0.5);
+    rightMotor.setOpenLoopRampRate(0.5);
   }
 
   /** Lower the climber arms
@@ -50,16 +48,15 @@ public class Lift extends SubsystemBase {
     }
     // Distance limits up 
     if(_speed < 0){
-      if(leftDis < -200){ leftSpeed = 0;}
-      if(rightDis > 200){ rightSpeed = 0;}
+      if(leftDis < -LIFT.kLimitUp){ leftSpeed = 0;}
+      if(rightDis > LIFT.kLimitUp){ rightSpeed = 0;}
     }
     // Distance limits down
     if(_speed > 0){
-      if(leftDis > 50) { leftSpeed = 0;}
-      if(rightDis < -50) { rightSpeed = 0;}
+      if(leftDis > LIFT.kLimitDown) { leftSpeed = 0;}
+      if(rightDis < -LIFT.kLimitDown) { rightSpeed = 0;}
     }
-    
-// 200 limit Left - neg
+    // 200 limit Left - neg
     leftMotor.set( leftSpeed);
     rightMotor.set( rightSpeed);
   }
@@ -72,6 +69,7 @@ public class Lift extends SubsystemBase {
   }
   @Override
   public void periodic() {
+    
     SmartDashboard.putNumber("Roll", RobotContainer.driveline.getRobotRoll() - m_rollOffset);
     SmartDashboard.putNumber("Left Lift Dis", leftMotor.getEncoder().getPosition());
     SmartDashboard.putNumber("right Lift Dis", rightMotor.getEncoder().getPosition());

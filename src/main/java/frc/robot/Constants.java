@@ -149,4 +149,11 @@ public final class Constants {
         public static final double kShotTimeBall2 = 2.5;
 
     }
+    public static final class LIFT {
+        public static final double kLimitUp = 200;
+        public static final double kLimitDown = 50;  // Actually 50 below starting as positive
+    }
+    public static final class ROBOT {
+        public static final double kFieldBlueCompassHeadingOffset = 0;
+    }
 }

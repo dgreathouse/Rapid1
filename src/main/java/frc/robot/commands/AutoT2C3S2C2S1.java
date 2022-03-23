@@ -11,7 +11,7 @@ import frc.ShotEnum;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoT2C3S2C2S1 extends SequentialCommandGroup {
-  public static String name = "T2 S1 C32 S2";
+  public static String name = "T2 Cargo 3,2";
   /** Creates a new AutoT2C3S2C3S1. */
   public AutoT2C3S2C2S1() {
     // Add your commands in the addCommands() call, e.g.
@@ -19,7 +19,7 @@ public class AutoT2C3S2C2S1 extends SequentialCommandGroup {
     addCommands(
       new AutoShooterShootCommand(ShotEnum.BACK_HI,2),
       // Drive Forward
-      new AutoDriveCommand(0.35, 0, 62),
+      new AutoDriveCommand(0.35, 0, 60),
       new AutoDelayCommand(0.5),
       new AutoDriveCommand(-0.35, 0, 20),
       // Drive in Reverse
@@ -27,7 +27,7 @@ public class AutoT2C3S2C2S1 extends SequentialCommandGroup {
       new AutoIntakeExtCommand(),
       new AutoDriveCommand(0.35, 0, 110),
       new AutoDelayCommand(1),
-      new AutoRototeRobotCommand(0.30, -135, 3),
+      new AutoRototeRobotCommand(0.30, -130, 3),
       new AutoDriveCommand(0.35, 0, 10),
       new AutoShooterShootCommand(ShotEnum.FRONT_AUTO_LONG,3)
 

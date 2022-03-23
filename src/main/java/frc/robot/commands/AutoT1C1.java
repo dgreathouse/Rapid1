@@ -10,16 +10,21 @@ import frc.ShotEnum;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoLeaveTarmac extends SequentialCommandGroup {
-  public static String name = "Leave Tarmac";
-  /** Creates a new AutoLeaveTarmac. */
-  public AutoLeaveTarmac() {
+public class AutoT1C1 extends SequentialCommandGroup {
+  public static String name = "T1 Cargo 1";
+  /** Creates a new AutoT1C1. */
+  public AutoT1C1() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoShooterShootCommand(ShotEnum.BACK_HI,2),
-      // Drive Forward
-      new AutoDriveCommand(0.35, 0, 70)
+      new AutoDriveCommand(0.35, 0, 62),
+      new AutoRototeRobotCommand(0.30, 180, 3),
+      new AutoShooterShootCommand(ShotEnum.FRONT_AUTO_LONG, 4),
+      new AutoRototeRobotCommand(0.30, 60, 3),
+      new AutoDriveCommand(-0.35, 0, 30),
+      new FieldOrientedResetCommand(),
+      new FieldOrientedModeActiveCommand()
+      
     );
   }
 }

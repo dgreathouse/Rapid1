@@ -7,10 +7,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.CANIDS;
 import frc.robot.Constants.PWMPORTS;
 import frc.robot.commands.ShotData;
@@ -25,11 +27,15 @@ public class Shooter extends SubsystemBase {
 
   /** Creates a new Shooter. */
   public Shooter() {
-    angleMotor.configOpenloopRamp(.25);
+    angleMotor.configOpenloopRamp(.075);
     angleMotor.config_kP(0, 50);
   }
   public void spin(double _speed){
-    double spd = _speed;//slew.calculate(_speed);
+    double spdAdj = RobotContainer.stickOperator.getRawAxis(4);
+    spdAdj = (spdAdj + 1)/2;
+
+    double spd = _speed;
+    spd = spd + (1-spd) * spdAdj;
     rightMotor.set( spd);
     leftMotor.set( -spd);
   }

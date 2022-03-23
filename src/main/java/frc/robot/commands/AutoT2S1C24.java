@@ -5,16 +5,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.ShotEnum;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoT2S1C24 extends SequentialCommandGroup {
-  public static String name = "T2 S1 C24";
+  public static String name = "T1 C1 S2";
   /** Creates a new AutoT2S1C24. */
   public AutoT2S1C24() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new AutoDriveCommand(0.35, 0, 62),
+      new AutoRototeRobotCommand(0.30, 180, 3),
+      new AutoShooterShootCommand(ShotEnum.FRONT_AUTO_LONG, 4),
+      new AutoRototeRobotCommand(0.30, 60, 3),
+      new AutoDriveCommand(-0.35, 0, 30),
+      new FieldOrientedResetCommand(),
+      new FieldOrientedModeActiveCommand()
+    );
   }
 }

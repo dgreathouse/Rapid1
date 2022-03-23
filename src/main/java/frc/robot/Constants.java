@@ -36,8 +36,8 @@ public final class Constants {
         public static final double kDriveVelRatio = 503.6815;
         public static final double kMaxDriveVelUnitsPer100ms = 21777.0;
         public static final double kMaxSpeedMetersPerSecond = 4.324;
-        public static final double kMaxAngularRateRadPerSecond = ((1 / kWheelTrackBaseCircumference / 2 * Math.PI)
-                * kMaxSpeedMetersPerSecond) * 1;
+        public static final double kMaxAngularRateRadPerSecond = 4.324;//((1 / kWheelTrackBaseCircumference / 2 * Math.PI)
+               // * kMaxSpeedMetersPerSecond) * 1;
         // frontLeft, frontRight, rearLeft, rearRight
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, kTrackWidth / 2),
@@ -85,7 +85,7 @@ public final class Constants {
     }
 
     public static final class OI {
-        public static final double kDeadband = 0.2;
+        public static final double kDeadband = 0.13;
     }
 
     public static final class CANIDS {
@@ -124,23 +124,23 @@ public final class Constants {
     }
 
     public static final class SHOOTER {
-        public static final double kBackHiSpeed = 0.70;
+        public static final double kBackHiSpeed = 0.65;
         public static final int kBackHiAngle = 0;
 
         public static final double kBackLowSpeed = 0.4;
         public static final int kBackLowAngle = 0;
 
-        public static final double kFrontHiCloseSpeed = 0.70;
-        public static final int kFrontHiCloseAngle = -95;
+        public static final double kFrontHiCloseSpeed = 0.62;
+        public static final int kFrontHiCloseAngle = -110;
 
         public static final double kFrontLowCloseSpeed = 0.5;
         public static final int kFrontLowCloseAngle = -130;
 
-        public static final double kFrontHi36InSpeed = 0.72;
-        public static final int kFrontHi36InAngle = -130;
+        public static final double kFrontHi36InSpeed = 0.67;
+        public static final int kFrontHi36InAngle = -140;
 
-        public static final double kFrontHiLaunchSpeed = 1;
-        public static final int kFrontHiLaunchAngle = -250;
+        public static final double kFrontHiLaunchSpeed = .8;
+        public static final int kFrontHiLaunchAngle = -200;
 
         public static final double kFrontAutoLongSpeed = 0.8;
         public static final int kFrontAutoLongAngle = -150;

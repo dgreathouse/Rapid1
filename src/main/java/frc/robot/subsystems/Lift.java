@@ -57,8 +57,8 @@ public class Lift extends SubsystemBase {
     }
     // Distance limits down
     if(_speed > 0){
-      if(leftDis > 0) { leftSpeed = 0;}
-      if(rightDis < 0) { rightSpeed = 0;}
+      if(leftDis > 50) { leftSpeed = 0;}
+      if(rightDis < -50) { rightSpeed = 0;}
     }
     
 // 200 limit Left - neg

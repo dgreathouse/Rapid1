@@ -34,10 +34,18 @@ public class DrivelineDefaultCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
     // Read Joystick values for X, Y and rotation
     double x = RobotContainer.stickDriver.getRawAxis(0);
     double y = -RobotContainer.stickDriver.getRawAxis(1);
     double twist = RobotContainer.stickDriver.getRawAxis(2);
+
+    if(RobotContainer.stickOperator.getRawButton(1)){
+      x = RobotContainer.stickOperator.getRawAxis(0);
+      y = -RobotContainer.stickOperator.getRawAxis(1);
+      twist = RobotContainer.stickOperator.getRawAxis(2);
+      
+    }
 
     // Limit the X,Y Rotation values so minor changes do not make motors move
     x =  Util.deadband(x, OI.kDeadband);//(Math.abs(x) > OI.kDeadband) ? x - OI.kDeadband : 0;
@@ -47,11 +55,14 @@ public class DrivelineDefaultCommand extends CommandBase {
     // x = xSRL.calculate(x);
     // y = ySRL.calculate(y);
     // twist = twistSRL.calculate(twist);
-
-    RobotContainer.driveline.drive(x, y, twist, RobotContainer.driveline.getFieldOrientedModeActive());
-    //SmartDashboard.putNumber("drvX", x);
+    if(RobotContainer.stickOperator.getRawButton(1)){
+      RobotContainer.driveline.drive(x, y, twist, false);
+    }else {
+      RobotContainer.driveline.drive(x, y, twist, RobotContainer.driveline.getFieldOrientedModeActive());
+    }
+        //SmartDashboard.putNumber("drvX", x);
     //SmartDashboard.putNumber("drvY", y);
-    //SmartDashboard.putNumber("drvTwist", twist);
+    SmartDashboard.putNumber("Gyro", RobotContainer.driveline.getRobotAngle());
   }
 
   // Called once the command ends or is interrupted.

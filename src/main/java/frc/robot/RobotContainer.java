@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
@@ -16,12 +17,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.AutoLeaveTarmac;
 import frc.robot.commands.AutoRedSHMC1SH;
+import frc.robot.commands.AutoT1C1;
 import frc.robot.commands.AutoT1C1S2;
-import frc.robot.commands.AutoT2C3S2;
-import frc.robot.commands.AutoT2C3S2C24;
-import frc.robot.commands.AutoT2C3S2C2S1;
-import frc.robot.commands.AutoT2S1C24;
-import frc.robot.commands.AutoT2S1C3S1;
+import frc.robot.commands.AutoT1C4;
+import frc.robot.commands.AutoT2C2;
+import frc.robot.commands.AutoT2C3;
 import frc.robot.commands.DrivelineDefaultCommand;
 import frc.robot.commands.FieldOrientedModeActiveCommand;
 import frc.robot.commands.FieldOrientedModeDisableCommand;
@@ -86,19 +86,18 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    autoChooser.addOption("Test", new AutoRedSHMC1SH());
     autoChooser.addOption(AutoLeaveTarmac.name, new AutoLeaveTarmac());
-autoChooser.addOption(AutoT2C3S2C2S1.name, new AutoT2C3S2C2S1());
-    autoChooser.addOption(AutoT1C1S2.name, new AutoT1C1S2());
-    autoChooser.addOption(AutoT2C3S2.name, new AutoT2C3S2());
-    autoChooser.addOption(AutoT2C3S2C24.name, new AutoT2C3S2C24());
-    autoChooser.addOption(AutoT2S1C24.name, new AutoT2S1C24());
-    autoChooser.addOption(AutoT2S1C3S1.name, new AutoT2S1C3S1());
-
+    autoChooser.addOption(AutoT1C1.name, new AutoT1C1());
+    autoChooser.addOption(AutoT1C4.name, new AutoT1C4());
+    autoChooser.addOption(AutoT2C2.name, new AutoT2C2());
+    autoChooser.addOption(AutoT2C3.name, new AutoT2C3());
     autoChooser.setDefaultOption(AutoDoNothing.name, new AutoDoNothing());
 
     SmartDashboard.putData(autoChooser);
-    //CameraServer.startAutomaticCapture();
+    UsbCamera cam =  CameraServer.startAutomaticCapture();
+    cam.setFPS(15);
+    cam.setResolution(360, 240);
+    
   }
 
   /**

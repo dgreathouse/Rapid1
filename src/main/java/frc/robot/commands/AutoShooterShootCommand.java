@@ -17,7 +17,7 @@ public class AutoShooterShootCommand extends CommandBase {
   ShotState shotState = ShotState.REVERSE;
   double timeOut = 1;
   double revT = 0.15;
-  double spinUpT = .75;
+  double spinUpT = .9;
   double shootT = 2;
 
   /** Creates a new AutoShooterShootCommand. */
@@ -64,7 +64,7 @@ switch(shotState){
         shooterSpeed = ShotData.getSpeed();
       break;
       case SHOOT:
-        intakeSpeed = 0.7;
+        intakeSpeed = 0.65;
         shooterSpeed = ShotData.getSpeed();
       break;
       case STOP:

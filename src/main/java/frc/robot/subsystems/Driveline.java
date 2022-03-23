@@ -12,8 +12,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.SPI.Port;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.CANIDS;
@@ -32,8 +31,8 @@ public class Driveline extends SubsystemBase {
       CANIDS.kDriveline_RBSteerEnc, InvertType.InvertMotorOutput, InvertType.InvertMotorOutput,
       SWERVE.kRBAbsoluteOffsetInDegrees);
 
-  private final AHRS m_gyro = new AHRS(Port.kMXP);
-
+  private final AHRS m_gyro = new AHRS(SerialPort.Port.kUSB);
+  
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DRIVE.kDriveKinematics, m_gyro.getRotation2d());
   private boolean isFieldOrientedMode = false;
   /** Creates a new Driveline. */
@@ -141,7 +140,7 @@ public class Driveline extends SubsystemBase {
     double xSpeed = _xSpeed * DRIVE.kMaxSpeedMetersPerSecond;
     double ySpeed = -_ySpeed * DRIVE.kMaxSpeedMetersPerSecond;
 
-    double rot = RobotContainer.driveline.getRobotAngle() * 0.001;
+    double rot = 0;  //RobotContainer.driveline.getRobotAngle() * 0.001;
     SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics
         .toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, rot));
     // Normalize the wheel speeds

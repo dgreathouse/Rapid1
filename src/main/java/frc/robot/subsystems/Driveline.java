@@ -49,20 +49,7 @@ public class Driveline extends SubsystemBase {
         m_leftBack.getState(),
         m_rightFront.getState(),
         m_rightBack.getState());
-    // SmartDashboard.putNumber("LF_Vel", m_leftFront.getDriveVelocityInMPS());
-    // SmartDashboard.putNumber("LB_Vel", m_leftBack.getDriveVelocityInMPS());
-    // SmartDashboard.putNumber("RF_Vel", m_rightFront.getDriveVelocityInMPS());
-    // SmartDashboard.putNumber("RB_Vel", m_rightBack.getDriveVelocityInMPS());
-    // SmartDashboard.putNumber("LF_Ang", m_leftFront.getSteerMotorCnts());
-    // SmartDashboard.putNumber("LB_Ang", m_leftBack.getSteerMotorCnts());
-    // SmartDashboard.putNumber("RF_Ang", m_rightFront.getSteerMotorCnts());
-    // SmartDashboard.putNumber("RB_Ang", m_rightBack.getSteerMotorCnts());
 
-    // SmartDashboard.putNumber("LF_Ang_AbsEnc", m_leftFront.getSteerEncAngleDeg());
-    // SmartDashboard.putNumber("LB_Ang_AbsEnc", m_leftBack.getSteerEncAngleDeg());
-    // SmartDashboard.putNumber("RF_Ang_AbsEnc",
-    // m_rightFront.getSteerEncAngleDeg());
-    // SmartDashboard.putNumber("RB_Ang_AbsEnc", m_rightBack.getSteerEncAngleDeg());
   }
 
   public Pose2d getPose() {
@@ -132,15 +119,14 @@ public class Driveline extends SubsystemBase {
     m_rightFront.setDesiredStateAutoMotionMagic(swerveModuleStates[1], _distanceIn);
     m_leftBack.setDesiredStateAutoMotionMagic(swerveModuleStates[2], _distanceIn);
     m_rightBack.setDesiredStateAutoMotionMagic(swerveModuleStates[3], _distanceIn);
-  //  SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
- //   SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
+
 
   }
   public void autoDrive(double _xSpeed, double _ySpeed) {
     double xSpeed = _xSpeed * DRIVE.kMaxSpeedMetersPerSecond;
     double ySpeed = -_ySpeed * DRIVE.kMaxSpeedMetersPerSecond;
 
-    double rot = 0;  //RobotContainer.driveline.getRobotAngle() * 0.001;
+    double rot = RobotContainer.driveline.getRobotAngle() * 0.025;
     SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics
         .toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, rot));
     // Normalize the wheel speeds
@@ -149,8 +135,7 @@ public class Driveline extends SubsystemBase {
     m_rightFront.setDesiredState(swerveModuleStates[1], false);
     m_leftBack.setDesiredState(swerveModuleStates[2], false);
     m_rightBack.setDesiredState(swerveModuleStates[3], false);
-  //  SmartDashboard.putNumber("Auto Distance Avg", getAverageDistanceInInches());
- //   SmartDashboard.putNumber("Auto Velocity Avg", getAverageVelocity());
+
 
   }
   /**
@@ -173,7 +158,7 @@ public class Driveline extends SubsystemBase {
   public void autoRotateRobot(double _rot) {
     SwerveModuleState[] swerveModuleStates = DRIVE.kDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, 0, _rot));
     // Normalize the wheel speeds
-    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DRIVE.kMaxAngularRateRadPerSecond);
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DRIVE.kMaxSpeedMetersPerSecond);
     m_leftFront.setDesiredState(swerveModuleStates[0], false);
     m_rightFront.setDesiredState(swerveModuleStates[1], false);
     m_leftBack.setDesiredState(swerveModuleStates[2], false);

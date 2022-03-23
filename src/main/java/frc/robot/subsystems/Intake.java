@@ -7,12 +7,8 @@ package frc.robot.subsystems;
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
 import com.revrobotics.Rev2mDistanceSensor.Unit;
-
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Constants.INTAKE;
 import frc.robot.Constants.PWMPORTS;
 
@@ -40,7 +36,7 @@ public class Intake extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    //SmartDashboard.putNumber("Intake Distance Sensor (mm)", distanceSensor.getRange());
+    
     
   }
 }

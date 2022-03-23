@@ -145,5 +145,8 @@ public final class Constants {
         public static final double kFrontAutoLongSpeed = 0.8;
         public static final int kFrontAutoLongAngle = -150;
 
+        public static final double kShotTimeBall1 = 2;
+        public static final double kShotTimeBall2 = 2.5;
+
     }
 }

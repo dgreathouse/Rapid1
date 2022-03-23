@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.ShotEnum;
 import frc.robot.RobotContainer;
 import frc.robot.ShotState;
+import frc.robot.Constants.SHOOTER;
 
 public class ShooterShootCommand extends CommandBase {
   Timer shotTimer = new Timer();
-  boolean isFinished = false;
   ShotEnum shot;
-  ShotState shotState;// = ShotState.REVERSE;
+  ShotState shotState = ShotState.REVERSE;
   //double timeOut = 1;
   double revT = 0.15;
   double spinUpT = 0.85; // Total = spinUpT - revT
@@ -35,9 +35,8 @@ public class ShooterShootCommand extends CommandBase {
     shotTimer.start();
     revT = 0.15;
     spinUpT = 0.85;
-    shootT = 2;
+    shootT = SHOOTER.kShotTimeBall2;
     RobotContainer.shooter.setAngle(ShotData.getAngle());
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -72,23 +71,10 @@ public class ShooterShootCommand extends CommandBase {
     case STOP:
       intakeSpeed = 0;
       shooterSpeed = 0;
-     // isFinished = true;
     break;
   }
   RobotContainer.shooter.setSpeed(shooterSpeed);
   RobotContainer.intake.spin(intakeSpeed);
-
-    // if(!shotTimer.hasElapsed(0.25)){
-    //   RobotContainer.intake.spin(-1.0);
-    //   RobotContainer.shooter.setSpeed(-0.2);
-    // }else {
-    //   RobotContainer.shooter.setSpeed(ShotData.getSpeed());
-    //   RobotContainer.intake.spin(0);
-    // }
-    // if(shotTimer.hasElapsed(1)){
-    //   RobotContainer.intake.spin(0.75);
-    // }
-    
   }
 
   // Called once the command ends or is interrupted.
@@ -98,6 +84,6 @@ public class ShooterShootCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isFinished;
+    return false;
   }
 }

@@ -16,9 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.AutoLeaveTarmac;
-import frc.robot.commands.AutoRedSHMC1SH;
 import frc.robot.commands.AutoT1C1;
-import frc.robot.commands.AutoT1C1S2;
 import frc.robot.commands.AutoT1C4;
 import frc.robot.commands.AutoT2C2;
 import frc.robot.commands.AutoT2C3;
@@ -107,6 +105,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    // Operator buttons
     JoystickButton shotTrigger = new JoystickButton(stickOperator, 1);
     shotTrigger.whileHeld(new ShooterShootCommand());
 
@@ -121,15 +121,6 @@ public class RobotContainer {
 
     JoystickButton intakeIn2Btn = new JoystickButton(stickOperator, 6);
     intakeIn2Btn.whileHeld(new IntakeSpinCommand(1));
-
-    JoystickButton intakeExtBtn = new JoystickButton(stickDriver, 1);
-    intakeExtBtn.whileHeld(new IntakeExtDownCommand());
-    
-    JoystickButton liftMoveBtn = new JoystickButton(stickDriver, 5);
-    liftMoveBtn.whileHeld(new LiftMoveCommand());
-
-    JoystickButton resetGyroBtn = new JoystickButton(stickDriver, 12);
-    resetGyroBtn.whenPressed(new FieldOrientedResetCommand());
 
     JoystickButton ShooterFrontHiBtn = new JoystickButton(stickOperator, 8);
     ShooterFrontHiBtn.whenPressed(new ShooterShootFrontHiCommand());
@@ -148,6 +139,16 @@ public class RobotContainer {
 
     JoystickButton ShooterFrontExtraFar = new JoystickButton(stickOperator, 10);
     ShooterFrontExtraFar.whenPressed(new ShooterShootFrontExtraFarCommand());
+
+    // Driver buttons
+    JoystickButton intakeExtBtn = new JoystickButton(stickDriver, 1);
+    intakeExtBtn.whileHeld(new IntakeExtDownCommand());
+    
+    JoystickButton liftMoveBtn = new JoystickButton(stickDriver, 10);
+    liftMoveBtn.whileHeld(new LiftMoveCommand());
+
+    JoystickButton resetGyroBtn = new JoystickButton(stickDriver, 12);
+    resetGyroBtn.whenPressed(new FieldOrientedResetCommand());
 
     JoystickButton DrivelineFieldOrientedModeActive = new JoystickButton(stickDriver, 7);
     DrivelineFieldOrientedModeActive.whenPressed(new FieldOrientedModeActiveCommand());

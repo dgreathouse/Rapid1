@@ -15,17 +15,15 @@ public class AutoShooterShootCommand extends CommandBase {
   boolean isFinished = false;
   ShotEnum shot;
   ShotState shotState = ShotState.REVERSE;
-  double timeOut = 1;
   double revT = 0.15;
-  double spinUpT = .9;
+  double spinUpT = .85;
   double shootT = 2;
 
   /** Creates a new AutoShooterShootCommand. */
-  public AutoShooterShootCommand(ShotEnum _shot, double _timeOut) {
+  public AutoShooterShootCommand(ShotEnum _shot, double _shootT) {
     addRequirements(RobotContainer.shooter, RobotContainer.intake);
     shot = _shot;
-    timeOut = _timeOut;
-    shootT = timeOut;
+    shootT = _shootT;
   }
 
   // Called when the command is initially scheduled.
@@ -44,13 +42,13 @@ public class AutoShooterShootCommand extends CommandBase {
     double shooterSpeed = 0;
     double intakeSpeed = 0;
     double t = shotTimer.get();
-    if(t > 0 && t < revT){
+    if(t < revT){
        shotState = ShotState.REVERSE;
-    }else if(t >  revT && t < spinUpT) {
+    }else if(t < spinUpT + revT) {
       shotState = ShotState.SPINUP;
-    }else if(t > spinUpT && t < shootT){
+    }else if(t < shootT + spinUpT + revT){
       shotState = ShotState.SHOOT;
-    }  else if(t > shootT) {
+    }  else if(t > shootT + spinUpT + revT) {
       shotState = ShotState.STOP;
     }
 
@@ -64,7 +62,7 @@ switch(shotState){
         shooterSpeed = ShotData.getSpeed();
       break;
       case SHOOT:
-        intakeSpeed = 0.65;
+        intakeSpeed = 0.75;
         shooterSpeed = ShotData.getSpeed();
       break;
       case STOP:
@@ -74,26 +72,6 @@ switch(shotState){
       break;
     }
     
-    // Reverse Intake
-    // Start Shooter
-    // Start Intake
-    // if(!shotTimer.hasElapsed(0.15)){
-    //   intakeSpeed = -1.0;
-    //   shooterSpeed = -0.2;
-
-    // }else {
-    //   intakeSpeed = 0.0;
-    //   shooterSpeed = ShotData.getSpeed();
-    // }
-
-    // if(shotTimer.hasElapsed(1)){
-    //   intakeSpeed = 0.75;
-    // }
-    // if(shotTimer.hasElapsed(timeOut)){
-    //   intakeSpeed = 0.0;
-    //   shooterSpeed = 0.0;
-    //   isFinished = true;
-    // }
     RobotContainer.shooter.setSpeed(shooterSpeed);
     RobotContainer.intake.spin(intakeSpeed);
   }

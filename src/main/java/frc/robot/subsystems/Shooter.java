@@ -6,9 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.hal.simulation.RoboRioDataJNI;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,8 +19,7 @@ public class Shooter extends SubsystemBase {
   private PWMVictorSPX leftMotor = new PWMVictorSPX(PWMPORTS.kLShooter);
   private PWMVictorSPX rightMotor = new PWMVictorSPX(PWMPORTS.kRShooter);
   private TalonSRX angleMotor = new TalonSRX(CANIDS.kShooterAngle);
-  private SlewRateLimiter slew = new SlewRateLimiter(2);
-
+ 
 
   /** Creates a new Shooter. */
   public Shooter() {

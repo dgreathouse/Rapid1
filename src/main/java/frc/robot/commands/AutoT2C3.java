@@ -7,9 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.ShotEnum;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+import frc.robot.Constants.SHOOTER;
 public class AutoT2C3 extends SequentialCommandGroup {
   public static String name = "T2 Cargo 3";
   /** Creates a new T2C3. */
@@ -21,7 +19,7 @@ public class AutoT2C3 extends SequentialCommandGroup {
       new AutoDelayCommand(0.5),
       new AutoDriveCommand(-0.35, 0, 22),
       new AutoRototeRobotCommand(0.30, 180, 3),
-      new AutoShooterShootCommand(ShotEnum.FRONT_AUTO_LONG, 4),
+      new AutoShooterShootCommand(ShotEnum.FRONT_AUTO_LONG, SHOOTER.kShotTimeBall2),
       new AutoRototeRobotCommand(0.30, -80, 3),
       new AutoDriveCommand(-0.35, 0, 30),
       new FieldOrientedResetCommand(),
